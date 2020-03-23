@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav"
+    app:startDestination="@id/singInFragment">
+    <fragment
+        android:id="@+id/singInFragment"
+        android:name="com.example.socialnetwork.sing_in.SingInFragment"
+        android:label="SingInFragment"
+        tools:layout="@layout/fragment_sing_in">
+        <action
+            android:id="@+id/action_singInFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="com.example.socialnetwork.user_profile.UserProfileFragment"
+        android:label="UserProfileFragment"
+        tools:layout="@layout/fragment_user_profile"/>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.socialnetwork.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_userPageFragment"
+            app:destination="@id/userPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userPageFragment"
+        android:name="com.example.socialnetwork.user_page.UserPageFragment"
+        android:label="fragment_user_page"
+        tools:layout="@layout/fragment_user_page" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.socialnetwork.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_userPageFragment"
+            app:destination="@id/userPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/latestMessagesFragment"
+        android:name="com.example.socialnetwork.messaging.LatestMessagesFragment"
+        android:label="LatestMessagesFragment"
+        tools:layout="@layout/fragment_latest_messages"/>
+</navigation>

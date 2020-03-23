@@ -1,0 +1,54 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.google.gms.google-services'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+    defaultConfig {
+        applicationId "com.example.socialnetwork"
+        minSdkVersion 22
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation 'com.github.OKatrych:RightSheetBehavior:1.0'
+
+    implementation 'tech.schoolhelper:moxy-x:1.7.0'
+    implementation 'com.google.firebase:firebase-firestore:21.4.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.google.firebase:firebase-auth:19.3.0'
+    implementation 'com.google.firebase:firebase-database:16.0.4'
+    kapt 'tech.schoolhelper:moxy-x-compiler:1.7.0'
+    implementation 'tech.schoolhelper:moxy-x-android:1.7.0'
+    implementation 'tech.schoolhelper:moxy-x-androidx:1.7.0'
+
+    implementation "androidx.navigation:navigation-fragment-ktx:2.3.0-alpha04"
+    implementation "androidx.navigation:navigation-ui-ktx:2.3.0-alpha04"
+    implementation 'com.google.android.material:material:1.2.0-alpha05'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+    implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
+    implementation "io.reactivex.rxjava2:rxkotlin:2.1.0"
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.core:core-ktx:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+
+}

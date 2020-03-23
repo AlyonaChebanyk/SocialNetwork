@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/amethysta</item>
+        <item>@font/cambo</item>
+        <item>@font/capriola</item>
+        <item>@font/glegoo</item>
+        <item>@font/hind_guntur</item>
+        <item>@font/khula_semibold</item>
+        <item>@font/secular_one</item>
+    </array>
+</resources>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "664834869924",
+    "firebase_url": "https://socialnetwork-87f5a.firebaseio.com",
+    "project_id": "socialnetwork-87f5a",
+    "storage_bucket": "socialnetwork-87f5a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:664834869924:android:2fec9a6bba5844642a7431",
+        "android_client_info": {
+          "package_name": "com.example.socialnetwork"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "664834869924-7h63lnhmea2so6g8ihccpipmiie687vr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.socialnetwork",
+            "certificate_hash": "183dfe352404662eafcbfa1bbc29231ee4878f11"
+          }
+        },
+        {
+          "client_id": "664834869924-58dit23658l5j9ortr1e0o3rtvn7hb9c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3yyGTKTYMknwWvmMdbaPuAKOa1GrrDXo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "664834869924-58dit23658l5j9ortr1e0o3rtvn7hb9c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
