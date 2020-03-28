@@ -37,6 +37,7 @@
         android:id="@+id/postListHomeRecyclerView"
         tools:listitem="@layout/post_item"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:paddingBottom="60dp"/>
 
 </LinearLayout>

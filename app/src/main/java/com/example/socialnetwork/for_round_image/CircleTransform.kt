@@ -1,4 +1,4 @@
-package com.example.socialnetwork
+package com.example.socialnetwork.for_round_image
 
 import android.graphics.*
 import com.squareup.picasso.Transformation

@@ -12,7 +12,8 @@
         android:id="@+id/postEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="5"/>
+        android:layout_weight="5"
+        android:backgroundTint="@color/white"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/postButton"

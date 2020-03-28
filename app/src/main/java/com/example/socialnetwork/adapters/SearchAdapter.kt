@@ -10,10 +10,14 @@ class SearchAdapter: RecyclerView.Adapter<SearchViewHolder>() {
 
     private val searchList = mutableListOf<User>()
 
-    fun setList(list: MutableList<User>){
+    fun clearList(){
         searchList.clear()
-        searchList.addAll(list)
         notifyDataSetChanged()
+    }
+
+    fun addUser(user: User){
+        searchList.add(user)
+        notifyItemInserted(searchList.size-1)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {

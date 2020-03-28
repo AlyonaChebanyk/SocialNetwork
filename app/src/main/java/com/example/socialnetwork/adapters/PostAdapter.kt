@@ -8,8 +8,15 @@ import com.example.socialnetwork.R
 import com.example.socialnetwork.entities.Post
 import com.example.socialnetwork.entities.User
 
-class PostAdapter(private val postList: ArrayList<Post>, val goToUserPageByClick: Boolean = false) :
+class PostAdapter(private val goToUserPageByClick: Boolean = false) :
     RecyclerView.Adapter<PostViewHolder>() {
+
+    private val postList: ArrayList<Post> = arrayListOf()
+
+    fun addPost(post: Post){
+        postList.add(post)
+        notifyItemInserted(postList.size-1)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val view =
