@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.socialnetwork.R
 import com.example.socialnetwork.entities.User
 
-class SearchAdapter: RecyclerView.Adapter<SearchViewHolder>() {
+class SearchAdapter(val authUser: User): RecyclerView.Adapter<SearchViewHolder>() {
 
     private val searchList = mutableListOf<User>()
 
@@ -26,7 +26,7 @@ class SearchAdapter: RecyclerView.Adapter<SearchViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
-        holder.bind(searchList[position])
+        holder.bind(searchList[position], authUser)
     }
 
     override fun getItemCount(): Int = searchList.size

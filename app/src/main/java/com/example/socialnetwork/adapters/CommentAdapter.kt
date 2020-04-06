@@ -12,8 +12,8 @@ class CommentAdapter(val user: User): RecyclerView.Adapter<CommentViewHolder>() 
     private val commentList = arrayListOf<Comment>()
 
     fun addComment(comment: Comment){
-        commentList.add(comment)
-        notifyItemInserted(commentList.size-1)
+        commentList.add(0, comment)
+        notifyItemInserted(0)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentViewHolder {

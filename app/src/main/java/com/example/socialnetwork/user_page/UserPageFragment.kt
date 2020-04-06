@@ -35,25 +35,24 @@ class UserPageFragment : MvpAppCompatFragment(), UserPageView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val user = arguments?.getSerializable("user") as User
+        val authUser = arguments!!.getParcelable<User>("authUser")!!
+        val userCurrentPage = arguments!!.getParcelable<User>("user")!!
 
-        presenter.setUserForCurrentPage(user)
-        presenter.displayUserData()
-        presenter.setAdapter()
-        presenter.setListener()
-        presenter.checkChipFollowed()
+        presenter.displayUserData(userCurrentPage)
+        presenter.setListener(userCurrentPage)
+        presenter.checkChipFollowed(userCurrentPage, authUser)
 
         followUserChip.setOnCheckedChangeListener { buttonView, isChecked ->
-            if (isChecked){
-                presenter.addToFollowings()
-            }else{
-                presenter.removeFromFollowings()
+            if (isChecked) {
+                presenter.addToFollowings(userCurrentPage, authUser)
+            } else {
+                presenter.removeFromFollowings(userCurrentPage, authUser)
             }
 
         }
 
         writeMessageButton.setOnClickListener {
-            val bundle = bundleOf("user" to user)
+            val bundle = bundleOf("authUser" to authUser, "user" to userCurrentPage)
             findNavController().navigate(R.id.action_userPageFragment_to_chatLogFragment, bundle)
         }
     }

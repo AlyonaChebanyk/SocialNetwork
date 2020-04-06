@@ -6,6 +6,7 @@ import androidx.navigation.fragment.findNavController
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.example.socialnetwork.R
+import com.example.socialnetwork.entities.User
 import com.example.socialnetwork.retrofit.Service
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -17,7 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import timber.log.Timber
 
 @InjectViewState
-class SingInPresenter: MvpPresenter<SingInView>() {
+class SingInPresenter : MvpPresenter<SingInView>() {
 
     private val dbFirestore = FirebaseFirestore.getInstance()
     private val dbAuth = FirebaseAuth.getInstance()
@@ -25,24 +26,24 @@ class SingInPresenter: MvpPresenter<SingInView>() {
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
 
-        if (dbAuth.currentUser != null){
+        if (dbAuth.currentUser != null) {
             viewState.goToUserPage()
         }
     }
 
-    fun singInUser(email: String, password: String){
+    fun singInUser(email: String, password: String) {
         dbAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful)
                     viewState.goToUserPage()
-                 else
+                else
                     viewState.showToast("No user with such email and password")
 
             }
     }
 
     @SuppressLint("CheckResult")
-    private fun uploadUsers(){
+    private fun uploadUsers() {
         Timber.plant(Timber.DebugTree())
 
         val retrofit = Retrofit.Builder()

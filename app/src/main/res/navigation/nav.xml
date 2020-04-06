@@ -3,16 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav"
-    app:startDestination="@id/singInFragment">
-    <fragment
-        android:id="@+id/singInFragment"
-        android:name="com.example.socialnetwork.sing_in.SingInFragment"
-        android:label="SingInFragment"
-        tools:layout="@layout/fragment_sing_in">
-        <action
-            android:id="@+id/action_singInFragment_to_userProfileFragment"
-            app:destination="@id/userProfileFragment" />
-    </fragment>
+    app:startDestination="@id/emptyFragment">
     <fragment
         android:id="@+id/userProfileFragment"
         android:name="com.example.socialnetwork.user_profile.UserProfileFragment"
@@ -74,4 +65,14 @@
         android:name="com.example.socialnetwork.post_page.PostPageFragment"
         android:label="fragment_post_page"
         tools:layout="@layout/fragment_post_page" />
+    <activity
+        android:id="@+id/authorisationActivity"
+        android:name="com.example.socialnetwork.authorisation_activity.AuthorisationActivity"
+        android:label="activity_authorisation"
+        tools:layout="@layout/activity_authorisation" />
+    <fragment
+        android:id="@+id/emptyFragment"
+        android:name="com.example.socialnetwork.main_activity.EmptyFragment"
+        android:label="fragment_empty"
+        tools:layout="@layout/fragment_empty" />
 </navigation>

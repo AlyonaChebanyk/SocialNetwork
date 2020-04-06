@@ -21,13 +21,12 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_chat_log.*
-import kotlinx.android.synthetic.main.main_activity.*
+import kotlinx.android.synthetic.main.activity_main.*
 
 class ChatLogFragment : MvpAppCompatFragment(), ChatLogView {
 
     @InjectPresenter
     lateinit var presenter: ChatLogPresenter
-    lateinit var secondUser: User
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,13 +39,16 @@ class ChatLogFragment : MvpAppCompatFragment(), ChatLogView {
 
         activity!!.bottom_navigation.visibility = View.GONE
 
-        secondUser = arguments?.getSerializable("user") as User
-        presenter.setAdapterAndListener(secondUser)
+        val authUser = arguments!!.getParcelable<User>("authUser")!!
+        val secondUser = arguments?.getParcelable<User>("user")!!
+
+        presenter.setAdapter(authUser, secondUser)
+        presenter.setListener(authUser, secondUser)
 
         sendMessageButton.setOnClickListener {
             val messageText = messageEditText.text.toString()
             if (messageText.isNotEmpty())
-                presenter.sendMessage(messageText, secondUser)
+                presenter.sendMessage(messageText, authUser, secondUser)
 
         }
 

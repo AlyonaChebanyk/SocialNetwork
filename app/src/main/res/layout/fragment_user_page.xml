@@ -91,7 +91,7 @@
                 android:layout_gravity="bottom|end"
                 android:layout_margin="20dp"
                 android:backgroundTint="@color/baseAppColor"
-                android:src="@drawable/ic_create_white_24dp"/>
+                android:src="@drawable/ic_message_black_24dp"/>
         </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

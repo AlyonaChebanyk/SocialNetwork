@@ -16,20 +16,14 @@ import kotlinx.android.synthetic.main.fragment_post_page.*
 class PostPagePresenter : MvpPresenter<PostPageView>(){
 
     private val dbRealtime = FirebaseDatabase.getInstance()
-    private lateinit var user: User
-    private lateinit var post: Post
     lateinit var adapter: CommentAdapter
 
-    fun setUser_(user: User){
-        this.user = user
+    fun setAdapter(user: User){
         adapter = CommentAdapter(user)
+        viewState.setAdapter(adapter)
     }
 
-    fun setPost_(post: Post){
-        this.post = post
-    }
-
-    fun setListener(){
+    fun setListener(user: User, post: Post){
         val reference = dbRealtime.getReference("/user-posts/${user.id}/${post.postId}/comments")
         reference.addChildEventListener(object : ChildEventListener {
             override fun onCancelled(p0: DatabaseError) {}
@@ -43,7 +37,7 @@ class PostPagePresenter : MvpPresenter<PostPageView>(){
         })
     }
 
-    fun addComment(commentText: String){
+    fun addComment(commentText: String, user: User, post: Post){
         val ref = dbRealtime.getReference("/user-posts/${user.id}/${post.postId}/comments").push()
         val comment = Comment(post.postId, commentText)
         ref.setValue(comment)

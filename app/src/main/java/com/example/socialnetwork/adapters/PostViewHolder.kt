@@ -24,12 +24,19 @@ class PostViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
     fun bind(post: Post, goToUserPageByClick: Boolean = false) {
 
         db.collection("users").document(post.userId).get()
-            .addOnSuccessListener { doc ->
-                val picture = doc.data!!["picture"] as String
-                val fullName = doc.data!!["full_name"] as String
+            .addOnSuccessListener { document ->
+                val user = User(
+                    document.id,
+                    document.data!!["full_name"] as String,
+                    document.data!!["user_name"] as String,
+                    document.data!!["picture"] as String
+                )
+
+                val bundle = bundleOf("user" to user, "post" to post)
+
                 with(view) {
                     Picasso.get()
-                        .load(picture)
+                        .load(user.picture)
                         .resize(110, 110)
                         .transform(
                             CircleTransform(
@@ -39,39 +46,56 @@ class PostViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
                         .into(userImage)
 
                     postContentTextView.text = post.content
-                    userNameTextView.text = fullName
+                    userNameTextView.text = user.fullName
+                    if (post.postImageUrl.isNotEmpty()) {
+                        Picasso.get()
+                            .load(post.postImageUrl)
+                            .into(postImage)
+                    }
+
                 }
-            }
-
-        db.collection("users").document(post.userId).get()
-            .addOnSuccessListener { document ->
-                val user = User(
-                    document.id,
-                    document.data!!["full_name"] as String,
-                    document.data!!["user_name"] as String,
-                    document.data!!["picture"] as String,
-                    document.data!!["following"] as MutableList<String>
-                )
-
-                val bundle = bundleOf("user" to user, "post" to post)
 
                 view.setOnClickListener {
-                    if (user.id == dbAuth.currentUser!!.uid){
-                        view.findNavController().navigate(R.id.action_userProfileFragment_to_postPage, bundle)
-                    }else{
-                        view.findNavController().navigate(R.id.action_userPageFragment_to_postPage, bundle)
-                    }
-
-                }
-
-                if (goToUserPageByClick) {
-                    view.userImage.setOnClickListener {
+                    if (user.id == dbAuth.currentUser!!.uid) {
                         view.findNavController()
-                            .navigate(R.id.action_homeFragment_to_userPageFragment, bundle)
+                            .navigate(R.id.action_userProfileFragment_to_postPage, bundle)
+                    } else {
+                        view.findNavController()
+                            .navigate(R.id.action_userPageFragment_to_postPage, bundle)
                     }
+
                 }
+
             }
 
 
+//        db.collection("users").document(post.userId).get()
+//            .addOnSuccessListener { document ->
+//                val user = User(
+//                    document.id,
+//                    document.data!!["full_name"] as String,
+//                    document.data!!["user_name"] as String,
+//                    document.data!!["picture"] as String,
+//                    document.data!!["following"] as MutableList<String>
+//                )
+//
+//                val bundle = bundleOf("user" to user, "post" to post)
+//
+//                view.setOnClickListener {
+//                    if (user.id == dbAuth.currentUser!!.uid){
+//                        view.findNavController().navigate(R.id.action_userProfileFragment_to_postPage, bundle)
+//                    }else{
+//                        view.findNavController().navigate(R.id.action_userPageFragment_to_postPage, bundle)
+//                    }
+//
+//                }
+//
+//                if (goToUserPageByClick) {
+//                    view.userImage.setOnClickListener {
+//                        view.findNavController()
+//                            .navigate(R.id.action_homeFragment_to_userPageFragment, bundle)
+//                    }
+//                }
+//            }
     }
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arellomobile.mvp.MvpAppCompatFragment
@@ -15,7 +16,7 @@ import com.example.socialnetwork.adapters.PostAdapter
 import com.example.socialnetwork.entities.User
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.main_activity.*
+import kotlinx.android.synthetic.main.activity_main.*
 
 class HomeFragment : MvpAppCompatFragment(), HomeView {
 
@@ -34,19 +35,17 @@ class HomeFragment : MvpAppCompatFragment(), HomeView {
 
         activity!!.toolbar.visibility = View.GONE
 
+        val authUser = arguments!!.getParcelable<User>("authUser")!!
+
+        presenter.setListener(authUser)
+
         authUserImageView.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_userProfileFragment)
+            val bundle = bundleOf("authUser" to authUser)
+            findNavController().navigate(R.id.action_homeFragment_to_userProfileFragment, bundle)
         }
 
     }
 
-    override fun displayUserData(user: User) {
-        Picasso.get()
-            .load(user.picture)
-            .transform(CircleTransform())
-            .resize(100, 100)
-            .into(authUserImageView)
-    }
 
     override fun setAdapter(postAdapter: PostAdapter) {
         postListHomeRecyclerView.apply {

@@ -6,7 +6,6 @@ import com.example.socialnetwork.entities.User
 
 interface HomeView: MvpView {
 
-    fun displayUserData(user: User)
     fun setAdapter(postAdapter: PostAdapter)
 
 }

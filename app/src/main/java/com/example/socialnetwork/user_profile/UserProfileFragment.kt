@@ -14,7 +14,7 @@ import com.example.socialnetwork.adapters.PostAdapter
 import com.example.socialnetwork.entities.User
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_user_profile.*
-import kotlinx.android.synthetic.main.main_activity.*
+import kotlinx.android.synthetic.main.activity_main.*
 
 class UserProfileFragment : MvpAppCompatFragment(), UserProfileView {
 
@@ -35,8 +35,13 @@ class UserProfileFragment : MvpAppCompatFragment(), UserProfileView {
         activity!!.toolbar.visibility = View.VISIBLE
         activity!!.bottom_navigation.visibility = View.VISIBLE
 
+        val authUser = arguments!!.getParcelable<User>("authUser")!!
+
+        presenter.displayUserData(authUser)
+        presenter.setListenerToUserPosts(authUser)
+
         addPostButton.setOnClickListener {
-            val bundle = bundleOf("user" to presenter.getUser())
+            val bundle = bundleOf("user" to authUser)
             bottomSheet.arguments = bundle
             if (bottomSheet.isAdded) {
                 bottomSheet.dialog?.show()

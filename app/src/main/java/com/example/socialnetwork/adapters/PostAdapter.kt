@@ -14,8 +14,8 @@ class PostAdapter(private val goToUserPageByClick: Boolean = false) :
     private val postList: ArrayList<Post> = arrayListOf()
 
     fun addPost(post: Post){
-        postList.add(post)
-        notifyItemInserted(postList.size-1)
+        postList.add(0, post)
+        notifyItemInserted(0)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {

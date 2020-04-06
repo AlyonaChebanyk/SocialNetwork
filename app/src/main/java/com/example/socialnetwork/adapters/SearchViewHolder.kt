@@ -10,10 +10,10 @@ import com.example.socialnetwork.for_round_image.CircleTransform
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.person_item.view.*
 
-class SearchViewHolder(val view: View): RecyclerView.ViewHolder(view) {
+class SearchViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
-    fun bind(user: User){
-        with(view){
+    fun bind(user: User, authUser: User) {
+        with(view) {
             Picasso.get()
                 .load(user.picture)
                 .transform(CircleTransform())
@@ -24,7 +24,10 @@ class SearchViewHolder(val view: View): RecyclerView.ViewHolder(view) {
             userNameTextView.text = "@" + user.userName
 
             person_item.setOnClickListener {
-                val bundle = bundleOf("user" to user)
+                val bundle = bundleOf(
+                    "authUser" to authUser,
+                    "user" to user
+                )
                 findNavController().navigate(R.id.action_searchFragment_to_userPageFragment, bundle)
             }
         }

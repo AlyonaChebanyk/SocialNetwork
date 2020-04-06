@@ -15,7 +15,7 @@ import com.example.socialnetwork.entities.User
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_post_page.*
 import kotlinx.android.synthetic.main.fragment_user_page.userLoginTextView
-import kotlinx.android.synthetic.main.main_activity.*
+import kotlinx.android.synthetic.main.activity_main.*
 
 class PostPageFragment : MvpAppCompatFragment(), PostPageView {
 
@@ -34,18 +34,16 @@ class PostPageFragment : MvpAppCompatFragment(), PostPageView {
 
         activity!!.bottom_navigation.visibility = View.GONE
 
-        val user = arguments!!.getSerializable("user") as User
-        val post = arguments!!.getSerializable("post") as Post
+        val user = arguments!!.getParcelable<User>("user")!!
+        val post = arguments!!.getParcelable<Post>("post")!!
 
-        presenter.setUser_(user)
-        presenter.setPost_(post)
-
-        presenter.setListener()
+        presenter.setAdapter(user)
+        presenter.setListener(user, post)
 
         addCommentButton.setOnClickListener {
             val commentText = commentEditText.text.toString()
             if (commentText.isNotEmpty()){
-                presenter.addComment(commentText)
+                presenter.addComment(commentText, user, post)
             }
 
         }

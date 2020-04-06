@@ -14,42 +14,23 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_user_page.*
 
 @InjectViewState
-class UserPagePresenter: MvpPresenter<UserPageView>() {
+class UserPagePresenter : MvpPresenter<UserPageView>() {
 
     private val dbFirestore = FirebaseFirestore.getInstance()
     private val dbRealtime = FirebaseDatabase.getInstance()
-    private val dbAuth = FirebaseAuth.getInstance()
-    lateinit var userCurrentPage: User
     lateinit var authUser: User
     val adapter = PostAdapter()
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-
-        dbFirestore.collection("users").document(dbAuth.currentUser!!.uid).get()
-            .addOnSuccessListener { document ->
-                authUser = User(
-                    document.id,
-                    document.data!!["full_name"] as String,
-                    document.data!!["user_name"] as String,
-                    document.data!!["picture"] as String,
-                    document.data!!["following"] as MutableList<String>)
-            }
-    }
-
-    fun setUserForCurrentPage(user: User){
-        userCurrentPage = user
-    }
-
-    fun displayUserData(){
-        viewState.displayUserData(userCurrentPage)
-    }
-
-    fun setAdapter(){
         viewState.setAdapter(adapter)
     }
 
-    fun setListener(){
+    fun displayUserData(userCurrentPage: User) {
+        viewState.displayUserData(userCurrentPage)
+    }
+
+    fun setListener(userCurrentPage: User) {
         val reference = dbRealtime.getReference("/user-posts/${userCurrentPage.id}")
         reference.addChildEventListener(object : ChildEventListener {
             override fun onCancelled(p0: DatabaseError) {}
@@ -59,41 +40,60 @@ class UserPagePresenter: MvpPresenter<UserPageView>() {
                 val post = p0.getValue(Post::class.java)
                 adapter.addPost(post!!)
             }
+
             override fun onChildRemoved(p0: DataSnapshot) {}
         }
         )
     }
 
-    fun checkChipFollowed(){
-        if (authUser.following.contains(userCurrentPage.id)){
-            viewState.setCheckedChip(true)
-            val following = authUser.following
-            following.remove(userCurrentPage.id)
-            dbFirestore.collection("users").document(authUser.id).set(
-                hashMapOf("full_name" to authUser.fullName,
-                    "user_name" to authUser.userName,
-                    "picture" to authUser.picture,
-                    "following" to following))
-        }
+    fun checkChipFollowed(userCurrentPage: User, authUser: User) {
+        dbFirestore.collection("users").document(authUser.id).get()
+            .addOnSuccessListener { document ->
+                val following = document.data!!["following"] as ArrayList<String>
+                if (following.contains(userCurrentPage.id)) {
+                    viewState.setCheckedChip(true)
+                    dbFirestore.collection("users").document(authUser.id).set(
+                        hashMapOf(
+                            "full_name" to authUser.fullName,
+                            "user_name" to authUser.userName,
+                            "picture" to authUser.picture,
+                            "following" to following
+                        )
+                    )
+                }
+            }
     }
 
-    fun addToFollowings(){
-        val following = authUser.following
-        following.add(userCurrentPage.id)
-        dbFirestore.collection("users").document(authUser.id).set(
-            hashMapOf("full_name" to authUser.fullName,
-                "user_name" to authUser.userName,
-                "picture" to authUser.picture,
-                "following" to following))
+    fun addToFollowings(userCurrentPage: User, authUser: User) {
+        dbFirestore.collection("users").document(authUser.id).get()
+            .addOnSuccessListener { document ->
+                val following = document.data!!["following"] as ArrayList<String>
+                following.add(userCurrentPage.id)
+                dbFirestore.collection("users").document(authUser.id).set(
+                    hashMapOf(
+                        "full_name" to authUser.fullName,
+                        "user_name" to authUser.userName,
+                        "picture" to authUser.picture,
+                        "following" to following
+                    )
+                )
+            }
+
     }
 
-    fun removeFromFollowings(){
-        val following = authUser.following
-        following.remove(userCurrentPage.id)
-        dbFirestore.collection("users").document(authUser.id).set(
-            hashMapOf("full_name" to authUser.fullName,
-                "user_name" to authUser.userName,
-                "picture" to authUser.picture,
-                "following" to following))
+    fun removeFromFollowings(userCurrentPage: User, authUser: User) {
+        dbFirestore.collection("users").document(authUser.id).get()
+            .addOnSuccessListener { document ->
+                val following = document.data!!["following"] as ArrayList<String>
+                following.remove(userCurrentPage.id)
+                dbFirestore.collection("users").document(authUser.id).set(
+                    hashMapOf(
+                        "full_name" to authUser.fullName,
+                        "user_name" to authUser.userName,
+                        "picture" to authUser.picture,
+                        "following" to following
+                    )
+                )
+            }
     }
 }

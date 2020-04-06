@@ -12,8 +12,7 @@ class SearchPresenter : MvpPresenter<SearchView>() {
 
     private val dbFirestore = FirebaseFirestore.getInstance()
     private val dbAuth = FirebaseAuth.getInstance()
-    private val adapter = SearchAdapter()
-    lateinit var user: User
+    private lateinit var adapter: SearchAdapter
     private val fullUserList = arrayListOf<User>()
 
     override fun onFirstViewAttach() {
@@ -26,19 +25,20 @@ class SearchPresenter : MvpPresenter<SearchView>() {
                         document.id,
                         document.data["full_name"] as String,
                         document.data["user_name"] as String,
-                        document.data["picture"] as String,
-                        document.data["following"] as ArrayList<String>
+                        document.data["picture"] as String
                     )
-                    fullUserList.add(currentUser)
-                    adapter.addUser(currentUser)
-                    if(currentUser.id == dbAuth.currentUser!!.uid){
-                        user = currentUser
-                        viewState.displayUserImage(user)
+                    if (currentUser.id != dbAuth.currentUser!!.uid){
+                        fullUserList.add(currentUser)
+                        adapter.addUser(currentUser)
                     }
 
                 }
             }
 
+    }
+
+    fun setAdapter(authUser: User){
+        adapter = SearchAdapter(authUser)
         viewState.setAdapter(adapter)
     }
 
@@ -49,5 +49,4 @@ class SearchPresenter : MvpPresenter<SearchView>() {
                 adapter.addUser(user)
         }
     }
-
 }

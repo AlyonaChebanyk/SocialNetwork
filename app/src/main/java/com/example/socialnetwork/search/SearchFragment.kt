@@ -16,7 +16,7 @@ import com.example.socialnetwork.adapters.SearchAdapter
 import com.example.socialnetwork.entities.User
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_search.*
-import kotlinx.android.synthetic.main.main_activity.*
+import kotlinx.android.synthetic.main.activity_main.*
 
 class SearchFragment : MvpAppCompatFragment(), SearchView {
 
@@ -35,6 +35,10 @@ class SearchFragment : MvpAppCompatFragment(), SearchView {
 
         activity!!.toolbar.visibility = View.GONE
 
+        val authUser = arguments!!.getParcelable<User>("authUser")!!
+
+        presenter.setAdapter(authUser)
+
         searchEditText.addTextChangedListener (object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {}
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
@@ -42,14 +46,6 @@ class SearchFragment : MvpAppCompatFragment(), SearchView {
                 presenter.updateSearchList(text.toString())
             }
         })
-    }
-
-    override fun displayUserImage(user: User) {
-        Picasso.get()
-            .load(user.picture)
-            .transform(CircleTransform())
-            .resize(110, 110)
-            .into(userImage)
     }
 
     override fun setAdapter(searchAdapter: SearchAdapter) {

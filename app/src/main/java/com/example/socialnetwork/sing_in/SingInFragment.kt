@@ -20,7 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_sing_in.*
-import kotlinx.android.synthetic.main.main_activity.*
+import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -41,9 +41,6 @@ class SingInFragment : MvpAppCompatFragment(), SingInView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        activity!!.toolbar.visibility = View.GONE
-        activity!!.bottom_navigation.visibility = View.GONE
-
         singInButton.setOnClickListener {
             val email = emailEditText.text.toString()
             val password = passwordEditText.text.toString()
@@ -55,7 +52,7 @@ class SingInFragment : MvpAppCompatFragment(), SingInView {
     }
 
     override fun goToUserPage() {
-        findNavController().navigate(R.id.action_singInFragment_to_userProfileFragment)
+        findNavController().navigate(R.id.action_singInFragment_to_mainActivity)
     }
 
     override fun showToast(text: String) {
