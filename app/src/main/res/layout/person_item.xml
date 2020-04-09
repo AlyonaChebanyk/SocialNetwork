@@ -5,10 +5,10 @@
     android:id="@+id/person_item"
     android:layout_margin="10dp">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/userImage"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_weight="1"/>
 
     <LinearLayout

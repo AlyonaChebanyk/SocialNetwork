@@ -6,7 +6,6 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.socialnetwork.entities.Post
 import com.example.socialnetwork.entities.User
-import com.example.socialnetwork.for_round_image.CircleTransform
 import com.example.socialnetwork.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -37,12 +36,6 @@ class PostViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
                 with(view) {
                     Picasso.get()
                         .load(user.picture)
-                        .resize(110, 110)
-                        .transform(
-                            CircleTransform(
-                                0
-                            )
-                        )
                         .into(userImage)
 
                     postContentTextView.text = post.content

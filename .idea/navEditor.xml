@@ -8,18 +8,6 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
-                  <entry key="authorisationActivity">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="128" />
-                            <option name="y" value="1" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
                   <entry key="chatLogFragment">
                     <value>
                       <LayoutPositions>
@@ -27,18 +15,6 @@
                           <Point>
                             <option name="x" value="744" />
                             <option name="y" value="496" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="emptyFragment">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="-96" />
-                            <option name="y" value="396" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -124,6 +100,27 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="singInFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="5" />
+                            <option name="y" value="161" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_singInFragment_to_userProfileFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="userPageFragment">
                     <value>
                       <LayoutPositions>
@@ -155,13 +152,18 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="500" />
-                            <option name="y" value="54" />
+                            <option name="x" value="453" />
+                            <option name="y" value="39" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_userProfileFragment_to_postPage">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_userProfileFragment_to_singInFragment">
                               <value>
                                 <LayoutPositions />
                               </value>

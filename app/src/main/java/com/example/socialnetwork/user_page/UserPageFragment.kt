@@ -9,7 +9,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
-import com.example.socialnetwork.for_round_image.CircleTransform
 import com.example.socialnetwork.R
 import com.example.socialnetwork.adapters.PostAdapter
 import com.example.socialnetwork.entities.User
@@ -60,12 +59,6 @@ class UserPageFragment : MvpAppCompatFragment(), UserPageView {
     override fun displayUserData(user: User) {
         Picasso.get()
             .load(user.picture)
-            .resize(300, 300)
-            .transform(
-                CircleTransform(
-                    15
-                )
-            )
             .into(userImage)
 
         userNameTextView.text = user.fullName

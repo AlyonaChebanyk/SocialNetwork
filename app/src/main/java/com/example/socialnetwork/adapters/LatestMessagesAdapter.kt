@@ -5,8 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.socialnetwork.R
 import com.example.socialnetwork.entities.Message
+import com.example.socialnetwork.entities.User
 
-class LatestMessagesAdapter() :
+class LatestMessagesAdapter(val authUser: User) :
     RecyclerView.Adapter<LatestMessagesViewHolder>() {
 
     private val latestMessagesList: MutableList<Message> = arrayListOf()
@@ -29,7 +30,7 @@ class LatestMessagesAdapter() :
     }
 
     override fun onBindViewHolder(holder: LatestMessagesViewHolder, position: Int) {
-        holder.bind(latestMessagesList[position])
+        holder.bind(latestMessagesList[position], authUser)
     }
 
     override fun getItemCount(): Int = latestMessagesList.size

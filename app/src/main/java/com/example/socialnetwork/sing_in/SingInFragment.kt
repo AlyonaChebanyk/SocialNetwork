@@ -31,6 +31,9 @@ class SingInFragment : MvpAppCompatFragment(), SingInView {
     @InjectPresenter
     lateinit var presenter: SingInPresenter
 
+    private val dbFirestore = FirebaseFirestore.getInstance()
+    private val dbAuth = FirebaseAuth.getInstance()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,7 +55,18 @@ class SingInFragment : MvpAppCompatFragment(), SingInView {
     }
 
     override fun goToUserPage() {
-        findNavController().navigate(R.id.action_singInFragment_to_mainActivity)
+            dbFirestore.collection("users").document(dbAuth.currentUser!!.uid).get()
+                .addOnSuccessListener { document ->
+                    val authUser = User(
+                        document.id,
+                        document.data!!["full_name"] as String,
+                        document.data!!["user_name"] as String,
+                        document.data!!["picture"] as String
+                    )
+                    val bundle = bundleOf("authUser" to authUser)
+                    findNavController().navigate(R.id.action_singInFragment_to_userProfileFragment, bundle)
+                }
+
     }
 
     override fun showToast(text: String) {

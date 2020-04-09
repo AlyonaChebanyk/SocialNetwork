@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
-import com.example.socialnetwork.for_round_image.CircleTransform
 import com.example.socialnetwork.R
 import com.example.socialnetwork.adapters.CommentAdapter
 import com.example.socialnetwork.entities.Post
@@ -53,8 +52,6 @@ class PostPageFragment : MvpAppCompatFragment(), PostPageView {
     override fun displayPostData(user: User, post: Post) {
         Picasso.get()
             .load(user.picture)
-            .resize(150, 150)
-            .transform(CircleTransform())
             .into(userImagePostPage)
 
         userNameTextView.text = user.fullName

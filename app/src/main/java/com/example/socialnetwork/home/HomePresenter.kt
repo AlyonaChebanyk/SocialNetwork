@@ -16,6 +16,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 class HomePresenter : MvpPresenter<HomeView>() {
 
     private val dbRealtime = FirebaseDatabase.getInstance()
+    private val dbFirestore = FirebaseFirestore.getInstance()
+    private val dbAuth = FirebaseAuth.getInstance()
     private val adapter = PostAdapter(true)
     lateinit var user: User
 
@@ -39,4 +41,5 @@ class HomePresenter : MvpPresenter<HomeView>() {
             override fun onChildRemoved(p0: DataSnapshot) {}
         })
     }
+
 }

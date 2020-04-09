@@ -4,7 +4,6 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.socialnetwork.for_round_image.CircleTransform
 import com.example.socialnetwork.R
 import com.example.socialnetwork.entities.Message
 import com.example.socialnetwork.entities.User
@@ -19,7 +18,7 @@ class LatestMessagesViewHolder(val view: View): RecyclerView.ViewHolder(view) {
     val dbAuth = FirebaseAuth.getInstance()
     lateinit var displayUserId: String
 
-    fun bind(message: Message){
+    fun bind(message: Message, authUser: User){
 
         displayUserId = if (message.fromId != dbAuth.currentUser!!.uid)
             message.fromId
@@ -36,15 +35,13 @@ class LatestMessagesViewHolder(val view: View): RecyclerView.ViewHolder(view) {
                 with(view){
                     Picasso.get()
                         .load(user.picture)
-                        .transform(CircleTransform())
-                        .resize(130, 130)
                         .into(userImage)
 
                     userNameTextView.text = user.fullName
                     latestMessageTextView.text = message.text
 
                     latestMessageId.setOnClickListener {
-                        val bundle = bundleOf("user" to user)
+                        val bundle = bundleOf("authUser" to authUser, "user" to user)
                         findNavController().navigate(R.id.action_latestMessagesFragment_to_chatLogFragment, bundle)
                     }
                 }
