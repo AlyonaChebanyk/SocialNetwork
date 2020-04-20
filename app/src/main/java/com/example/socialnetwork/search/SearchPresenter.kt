@@ -4,7 +4,9 @@ import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.example.socialnetwork.adapters.SearchAdapter
 import com.example.socialnetwork.entities.User
+import com.example.socialnetwork.repository.Repository
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.core.Repo
 import com.google.firebase.firestore.FirebaseFirestore
 
 @InjectViewState
@@ -12,11 +14,14 @@ class SearchPresenter : MvpPresenter<SearchView>() {
 
     private val dbFirestore = FirebaseFirestore.getInstance()
     private val dbAuth = FirebaseAuth.getInstance()
-    private lateinit var adapter: SearchAdapter
+    private val adapter = SearchAdapter()
     private val fullUserList = arrayListOf<User>()
+    val authUser = Repository.currentUser
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
+
+        viewState.setAdapter(adapter)
 
         dbFirestore.collection("users").get()
             .addOnSuccessListener { documents ->
@@ -35,11 +40,6 @@ class SearchPresenter : MvpPresenter<SearchView>() {
                 }
             }
 
-    }
-
-    fun setAdapter(authUser: User){
-        adapter = SearchAdapter(authUser)
-        viewState.setAdapter(adapter)
     }
 
     fun updateSearchList(str: String){

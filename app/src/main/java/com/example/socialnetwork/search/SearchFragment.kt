@@ -12,6 +12,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.example.socialnetwork.R
 import com.example.socialnetwork.adapters.SearchAdapter
 import com.example.socialnetwork.entities.User
+import com.example.socialnetwork.repository.Repository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
@@ -38,26 +39,7 @@ class SearchFragment : MvpAppCompatFragment(), SearchView {
 
         activity!!.toolbar.visibility = View.GONE
 
-        var authUser = arguments?.getParcelable<User>("authUser")
-
-        if (authUser == null) {
-            dbFirestore.collection("users").document(dbAuth.currentUser!!.uid).get()
-                .addOnSuccessListener { document ->
-                    authUser = User(
-                        document.id,
-                        document.data!!["full_name"] as String,
-                        document.data!!["user_name"] as String,
-                        document.data!!["picture"] as String
-                    )
-                    presenter.setAdapter(authUser!!)
-                }
-
-        } else {
-            presenter.setAdapter(authUser!!)
-        }
-
-
-        searchEditText.addTextChangedListener (object : TextWatcher {
+        searchEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {}
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {

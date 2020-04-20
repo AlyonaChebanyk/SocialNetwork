@@ -5,6 +5,7 @@ import com.arellomobile.mvp.MvpPresenter
 import com.example.socialnetwork.adapters.PostAdapter
 import com.example.socialnetwork.entities.Post
 import com.example.socialnetwork.entities.User
+import com.example.socialnetwork.repository.Repository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
@@ -16,19 +17,17 @@ import com.google.firebase.firestore.FirebaseFirestore
 class HomePresenter : MvpPresenter<HomeView>() {
 
     private val dbRealtime = FirebaseDatabase.getInstance()
-    private val dbFirestore = FirebaseFirestore.getInstance()
-    private val dbAuth = FirebaseAuth.getInstance()
     private val adapter = PostAdapter(true)
-    lateinit var user: User
+    val authUser = Repository.currentUser!!
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-
         viewState.setAdapter(adapter)
+        setListener()
     }
 
-    fun setListener(user: User){
-        val reference = dbRealtime.getReference("/following-posts/${user.id}")
+    private fun setListener(){
+        val reference = dbRealtime.getReference("/following-posts/${authUser.id}")
         reference.addChildEventListener(object : ChildEventListener {
             override fun onCancelled(p0: DatabaseError) {}
             override fun onChildMoved(p0: DataSnapshot, p1: String?) {}

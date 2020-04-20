@@ -1,7 +1,6 @@
 package com.example.socialnetwork.user_profile
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -14,15 +13,13 @@ import android.widget.Toast
 import com.example.socialnetwork.R
 import com.example.socialnetwork.entities.Post
 import com.example.socialnetwork.entities.User
+import com.example.socialnetwork.repository.Repository
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.bottom_sheet.*
-import kotlinx.android.synthetic.main.fragment_user_page.*
 import java.io.ByteArrayOutputStream
 import java.io.FileNotFoundException
 import java.io.InputStream
@@ -34,7 +31,7 @@ class AddPostBottomSheet : BottomSheetDialogFragment() {
     private val dbStorage = FirebaseStorage.getInstance()
     private val dbFirestore = FirebaseFirestore.getInstance()
     private val dbRealtime = FirebaseDatabase.getInstance()
-    var postImageUri: Uri? = null
+    private var postImageUri: Uri? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,7 +45,7 @@ class AddPostBottomSheet : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val user = arguments!!.getParcelable<User>("user")!!
+        val user = Repository.currentUser!!
 
         postButton.setOnClickListener {
             if (postEditText.text.isNotEmpty()) {
@@ -56,21 +53,17 @@ class AddPostBottomSheet : BottomSheetDialogFragment() {
                 val reference = dbRealtime.getReference("/user-posts/${user.id}").push()
 
                 if (postImageUri!=null){
-                    val imageStream: InputStream? =
-                        activity!!.contentResolver.openInputStream(postImageUri!!)
-                    val selectedImage = BitmapFactory.decodeStream(imageStream)
+
 
                     val storageRef = dbStorage.reference
                     val imageRef: StorageReference = storageRef.child(reference.key!!)
-                    val baos = ByteArrayOutputStream()
-                    selectedImage.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-                    val data1 = baos.toByteArray()
 
-                    imageRef.putBytes(data1).addOnCompleteListener {
+                    imageRef.putFile(postImageUri!!).addOnSuccessListener {
+
                         imageRef.downloadUrl.addOnSuccessListener { it2 ->
                             val postImageUrl = it2.toString()
 
-                            val userPost = Post(reference.key!!, user.id, postEditText.text.toString(), postImageUrl = postImageUrl)
+                            val userPost = Post(reference.key!!, user.id, postEditText.text.toString(), postImageUrl)
                             reference.setValue(userPost)
 
                             postEditText.text.clear()

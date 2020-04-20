@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.person_item.view.*
 
 class SearchViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
-    fun bind(user: User, authUser: User) {
+    fun bind(user: User) {
         with(view) {
             Picasso.get()
                 .load(user.picture)
@@ -22,7 +22,6 @@ class SearchViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
             person_item.setOnClickListener {
                 val bundle = bundleOf(
-                    "authUser" to authUser,
                     "user" to user
                 )
                 findNavController().navigate(R.id.action_searchFragment_to_userPageFragment, bundle)

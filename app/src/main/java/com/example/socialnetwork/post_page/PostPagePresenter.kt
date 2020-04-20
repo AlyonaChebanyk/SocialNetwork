@@ -44,4 +44,8 @@ class PostPagePresenter : MvpPresenter<PostPageView>(){
         viewState.clearCommentText()
     }
 
+    fun displayPostData(user: User, post: Post){
+        viewState.displayPostData(user, post)
+    }
+
 }

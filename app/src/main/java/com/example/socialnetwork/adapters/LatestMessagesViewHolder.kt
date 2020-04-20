@@ -18,7 +18,7 @@ class LatestMessagesViewHolder(val view: View): RecyclerView.ViewHolder(view) {
     val dbAuth = FirebaseAuth.getInstance()
     lateinit var displayUserId: String
 
-    fun bind(message: Message, authUser: User){
+    fun bind(message: Message){
 
         displayUserId = if (message.fromId != dbAuth.currentUser!!.uid)
             message.fromId
@@ -41,7 +41,7 @@ class LatestMessagesViewHolder(val view: View): RecyclerView.ViewHolder(view) {
                     latestMessageTextView.text = message.text
 
                     latestMessageId.setOnClickListener {
-                        val bundle = bundleOf("authUser" to authUser, "user" to user)
+                        val bundle = bundleOf("user" to user)
                         findNavController().navigate(R.id.action_latestMessagesFragment_to_chatLogFragment, bundle)
                     }
                 }

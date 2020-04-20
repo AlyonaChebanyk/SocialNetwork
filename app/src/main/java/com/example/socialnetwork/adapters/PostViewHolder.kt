@@ -62,33 +62,5 @@ class PostViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
             }
 
 
-//        db.collection("users").document(post.userId).get()
-//            .addOnSuccessListener { document ->
-//                val user = User(
-//                    document.id,
-//                    document.data!!["full_name"] as String,
-//                    document.data!!["user_name"] as String,
-//                    document.data!!["picture"] as String,
-//                    document.data!!["following"] as MutableList<String>
-//                )
-//
-//                val bundle = bundleOf("user" to user, "post" to post)
-//
-//                view.setOnClickListener {
-//                    if (user.id == dbAuth.currentUser!!.uid){
-//                        view.findNavController().navigate(R.id.action_userProfileFragment_to_postPage, bundle)
-//                    }else{
-//                        view.findNavController().navigate(R.id.action_userPageFragment_to_postPage, bundle)
-//                    }
-//
-//                }
-//
-//                if (goToUserPageByClick) {
-//                    view.userImage.setOnClickListener {
-//                        view.findNavController()
-//                            .navigate(R.id.action_homeFragment_to_userPageFragment, bundle)
-//                    }
-//                }
-//            }
     }
 }

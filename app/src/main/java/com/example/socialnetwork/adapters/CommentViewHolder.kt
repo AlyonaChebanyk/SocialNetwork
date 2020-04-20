@@ -14,7 +14,7 @@ class CommentViewHolder(val view: View): RecyclerView.ViewHolder(view) {
                 .load(user.picture)
                 .into(userImageComment)
 
-            userNameCommentTextView.text = user.userName
+            userNameCommentTextView.text = user.fullName
             userLoginCommentTextView.text = "@" + user.userName
             commentTextView.text = comment.text
         }

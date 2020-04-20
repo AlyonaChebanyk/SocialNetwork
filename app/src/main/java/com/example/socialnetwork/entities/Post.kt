@@ -8,5 +8,6 @@ class Post(
     val postId: String = "",
     val userId: String = "",
     val content: String = "",
-    val postImageUrl: String = ""
+    val postImageUrl: String = "",
+    val timestamp: Long = -1
 ) : Parcelable

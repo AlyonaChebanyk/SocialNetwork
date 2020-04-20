@@ -12,9 +12,9 @@ import com.example.socialnetwork.adapters.CommentAdapter
 import com.example.socialnetwork.entities.Post
 import com.example.socialnetwork.entities.User
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_post_page.*
 import kotlinx.android.synthetic.main.fragment_user_page.userLoginTextView
-import kotlinx.android.synthetic.main.activity_main.*
 
 class PostPageFragment : MvpAppCompatFragment(), PostPageView {
 
@@ -38,6 +38,7 @@ class PostPageFragment : MvpAppCompatFragment(), PostPageView {
 
         presenter.setAdapter(user)
         presenter.setListener(user, post)
+        presenter.displayPostData(user, post)
 
         addCommentButton.setOnClickListener {
             val commentText = commentEditText.text.toString()

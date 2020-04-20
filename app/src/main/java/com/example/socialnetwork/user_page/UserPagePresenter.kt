@@ -5,6 +5,7 @@ import com.arellomobile.mvp.MvpPresenter
 import com.example.socialnetwork.adapters.PostAdapter
 import com.example.socialnetwork.entities.Post
 import com.example.socialnetwork.entities.User
+import com.example.socialnetwork.repository.Repository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
@@ -18,7 +19,7 @@ class UserPagePresenter : MvpPresenter<UserPageView>() {
 
     private val dbFirestore = FirebaseFirestore.getInstance()
     private val dbRealtime = FirebaseDatabase.getInstance()
-    lateinit var authUser: User
+    val authUser = Repository.currentUser!!
     val adapter = PostAdapter()
 
     override fun onFirstViewAttach() {
@@ -46,7 +47,7 @@ class UserPagePresenter : MvpPresenter<UserPageView>() {
         )
     }
 
-    fun checkChipFollowed(userCurrentPage: User, authUser: User) {
+    fun checkChipFollowed(userCurrentPage: User) {
         dbFirestore.collection("users").document(authUser.id).get()
             .addOnSuccessListener { document ->
                 val following = document.data!!["following"] as ArrayList<String>
@@ -64,7 +65,7 @@ class UserPagePresenter : MvpPresenter<UserPageView>() {
             }
     }
 
-    fun addToFollowings(userCurrentPage: User, authUser: User) {
+    fun addToFollowings(userCurrentPage: User) {
         dbFirestore.collection("users").document(authUser.id).get()
             .addOnSuccessListener { document ->
                 val following = document.data!!["following"] as ArrayList<String>
@@ -81,7 +82,7 @@ class UserPagePresenter : MvpPresenter<UserPageView>() {
 
     }
 
-    fun removeFromFollowings(userCurrentPage: User, authUser: User) {
+    fun removeFromFollowings(userCurrentPage: User) {
         dbFirestore.collection("users").document(authUser.id).get()
             .addOnSuccessListener { document ->
                 val following = document.data!!["following"] as ArrayList<String>

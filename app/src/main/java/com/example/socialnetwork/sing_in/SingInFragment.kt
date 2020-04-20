@@ -14,6 +14,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.example.socialnetwork.R
 
 import com.example.socialnetwork.entities.User
+import com.example.socialnetwork.repository.Repository
 import com.example.socialnetwork.retrofit.Service
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -31,13 +32,14 @@ class SingInFragment : MvpAppCompatFragment(), SingInView {
     @InjectPresenter
     lateinit var presenter: SingInPresenter
 
-    private val dbFirestore = FirebaseFirestore.getInstance()
-    private val dbAuth = FirebaseAuth.getInstance()
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        activity!!.bottom_navigation.visibility = View.GONE
+        activity!!.toolbar.visibility = View.GONE
+
         return inflater.inflate(R.layout.fragment_sing_in, container, false)
     }
 
@@ -55,18 +57,7 @@ class SingInFragment : MvpAppCompatFragment(), SingInView {
     }
 
     override fun goToUserPage() {
-            dbFirestore.collection("users").document(dbAuth.currentUser!!.uid).get()
-                .addOnSuccessListener { document ->
-                    val authUser = User(
-                        document.id,
-                        document.data!!["full_name"] as String,
-                        document.data!!["user_name"] as String,
-                        document.data!!["picture"] as String
-                    )
-                    val bundle = bundleOf("authUser" to authUser)
-                    findNavController().navigate(R.id.action_singInFragment_to_userProfileFragment, bundle)
-                }
-
+        findNavController().navigate(R.id.action_singInFragment_to_userProfileFragment)
     }
 
     override fun showToast(text: String) {

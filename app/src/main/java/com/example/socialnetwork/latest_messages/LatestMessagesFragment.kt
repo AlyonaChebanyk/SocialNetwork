@@ -37,25 +37,6 @@ class LatestMessagesFragment : MvpAppCompatFragment(), LatestMessagesView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var authUser = arguments?.getParcelable<User>("authUser")
-
-        if (authUser == null) {
-            dbFirestore.collection("users").document(dbAuth.currentUser!!.uid).get()
-                .addOnSuccessListener { document ->
-                    authUser = User(
-                        document.id,
-                        document.data!!["full_name"] as String,
-                        document.data!!["user_name"] as String,
-                        document.data!!["picture"] as String
-                    )
-                    presenter.setAdapter(authUser!!)
-                    presenter.setListener(authUser!!)
-                }
-
-        } else {
-            presenter.setAdapter(authUser!!)
-            presenter.setListener(authUser!!)
-        }
 
     }
 

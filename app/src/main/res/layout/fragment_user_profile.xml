@@ -1,79 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingBottom="50dp">
 
-    <FrameLayout
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="80dp"
+        android:background="@color/baseAppColor" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@color/baseAppColor" />
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:padding="10dp"
+        android:src="@drawable/ic_arrow_back_white_24dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/userImage"
-            app:civ_border_width="4dp"
             android:layout_width="90dp"
             android:layout_height="90dp"
-            app:civ_border_color="@color/white"
             android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="50dp"
+            app:civ_border_color="@color/white"
+            app:civ_border_width="4dp" />
+
+        <TextView
+            android:id="@+id/userNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/secular_one"
+            android:text="Name"
+            android:textColor="#14171A"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/userLoginTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="60dp" />
-    </FrameLayout>
+            android:layout_marginBottom="15dp"
+            android:fontFamily="@font/glegoo"
+            android:text="login"
+            android:textSize="18sp" />
 
-    <TextView
-        android:layout_marginTop="160dp"
-        android:id="@+id/userNameTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:fontFamily="@font/secular_one"
-        android:text="Name"
-        android:textColor="#14171A"
-        android:textSize="24sp" />
-
-    <TextView
-        android:layout_marginTop="190dp"
-        android:id="@+id/userLoginTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="15dp"
-        android:fontFamily="@font/glegoo"
-        android:text="login"
-        android:textSize="18sp" />
-
-    <View
-        android:layout_marginTop="240dp"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#DDD" />
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="50dp">
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#DDD" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_marginTop="240dp"
             android:id="@+id/postListRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             tools:listitem="@layout/post_item" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/addPostButton"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="20dp"
-            android:backgroundTint="@color/baseAppColor"
-            android:src="@drawable/ic_create_white_24dp"/>
-    </FrameLayout>
+    </LinearLayout>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addPostButton"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="20dp"
+        android:backgroundTint="@color/baseAppColor"
+        android:src="@drawable/ic_create_white_24dp" />
+
+</FrameLayout>

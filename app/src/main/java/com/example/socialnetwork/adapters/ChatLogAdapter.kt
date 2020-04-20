@@ -7,9 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.socialnetwork.R
 import com.example.socialnetwork.entities.Message
 import com.example.socialnetwork.entities.User
+import com.example.socialnetwork.repository.Repository
 import com.google.firebase.firestore.FirebaseFirestore
 
-class ChatLogAdapter(private val authUser: User, private val secondUser: User) :
+class ChatLogAdapter(private val secondUser: User) :
     RecyclerView.Adapter<ChatLogViewHolder>() {
 
     private val messageList: ArrayList<Message> = arrayListOf()
@@ -37,14 +38,14 @@ class ChatLogAdapter(private val authUser: User, private val secondUser: User) :
     }
 
     override fun onBindViewHolder(holder: ChatLogViewHolder, position: Int) {
-        holder.bind(messageList[position], authUser, secondUser)
+        holder.bind(messageList[position], secondUser)
     }
 
     override fun getItemCount(): Int = messageList.size
 
     override fun getItemViewType(position: Int): Int {
         return when(messageList[position].fromId){
-            authUser.id -> RIGHT_SIDE
+            Repository.currentUser!!.id -> RIGHT_SIDE
             else -> LEFT_SIDE
         }
     }

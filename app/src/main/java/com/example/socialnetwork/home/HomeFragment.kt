@@ -38,27 +38,8 @@ class HomeFragment : MvpAppCompatFragment(), HomeView {
 
         activity!!.toolbar.visibility = View.GONE
 
-        var authUser = arguments?.getParcelable<User>("authUser")
-
-        if (authUser == null) {
-            dbFirestore.collection("users").document(dbAuth.currentUser!!.uid).get()
-                .addOnSuccessListener { document ->
-                    authUser = User(
-                        document.id,
-                        document.data!!["full_name"] as String,
-                        document.data!!["user_name"] as String,
-                        document.data!!["picture"] as String
-                    )
-                    presenter.setListener(authUser!!)
-                }
-
-        } else {
-            presenter.setListener(authUser!!)
-        }
-
         authUserImageView.setOnClickListener {
-            val bundle = bundleOf("authUser" to authUser)
-            findNavController().navigate(R.id.action_homeFragment_to_userProfileFragment, bundle)
+            findNavController().navigate(R.id.action_homeFragment_to_userProfileFragment)
         }
     }
 

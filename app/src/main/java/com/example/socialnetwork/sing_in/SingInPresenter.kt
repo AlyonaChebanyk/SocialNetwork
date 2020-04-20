@@ -7,8 +7,10 @@ import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.example.socialnetwork.R
 import com.example.socialnetwork.entities.User
+import com.example.socialnetwork.repository.Repository
 import com.example.socialnetwork.retrofit.Service
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -20,14 +22,14 @@ import timber.log.Timber
 @InjectViewState
 class SingInPresenter : MvpPresenter<SingInView>() {
 
-    private val dbFirestore = FirebaseFirestore.getInstance()
     private val dbAuth = FirebaseAuth.getInstance()
+    private val dbFirestore = FirebaseFirestore.getInstance()
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
 
         if (dbAuth.currentUser != null) {
-            viewState.goToUserPage()
+            goToUserPage()
         }
     }
 
@@ -35,49 +37,24 @@ class SingInPresenter : MvpPresenter<SingInView>() {
         dbAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful)
-                    viewState.goToUserPage()
+                    goToUserPage()
                 else
                     viewState.showToast("No user with such email and password")
 
             }
     }
 
-    @SuppressLint("CheckResult")
-    private fun uploadUsers() {
-        Timber.plant(Timber.DebugTree())
-
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://randomuser.me/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .build()
-
-        val service = retrofit.create(Service::class.java)
-
-        service.addUsers(10)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { result ->
-                for (user in result.userRetrofitList) {
-                    dbAuth.createUserWithEmailAndPassword(user.email, user.login.password)
-                        .addOnCompleteListener {
-                            Timber.d("${user.email}:  ${user.login.password}")
-                            dbAuth.signInWithEmailAndPassword(user.email, user.login.password)
-                            val userId = dbAuth.currentUser!!.uid
-                            dbFirestore.collection("users").document(userId)
-                                .set(
-                                    hashMapOf(
-                                        "full_name" to "${user.name.first} ${user.name.last}",
-                                        "user_name" to user.login.username,
-                                        "picture" to user.picture.medium,
-                                        "following" to mutableListOf<String>()
-                                    )
-                                )
-                        }
-
-                }
-
+    private fun goToUserPage() {
+        dbFirestore.collection("users").document(dbAuth.currentUser!!.uid).get()
+            .addOnSuccessListener { document ->
+                val authUser = User(
+                    document.id,
+                    document.data!!["full_name"] as String,
+                    document.data!!["user_name"] as String,
+                    document.data!!["picture"] as String
+                )
+                Repository.currentUser = authUser
+                viewState.goToUserPage()
             }
     }
-
 }

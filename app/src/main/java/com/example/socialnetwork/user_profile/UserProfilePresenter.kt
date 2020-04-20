@@ -5,30 +5,33 @@ import com.arellomobile.mvp.MvpPresenter
 import com.example.socialnetwork.adapters.PostAdapter
 import com.example.socialnetwork.entities.Post
 import com.example.socialnetwork.entities.User
-import com.google.firebase.auth.FirebaseAuth
+import com.example.socialnetwork.repository.Repository
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.firestore.FirebaseFirestore
 
 @InjectViewState
 class UserProfilePresenter : MvpPresenter<UserProfileView>() {
 
     private val dbRealtime = FirebaseDatabase.getInstance()
     private val adapter = PostAdapter()
+    private val authUser = Repository.currentUser!!
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
+
         viewState.setAdapter(adapter)
+        displayUserData()
+        setListenerToUserPosts()
     }
 
-    fun displayUserData(user: User){
-        viewState.displayUserData(user)
+    private fun displayUserData(){
+        viewState.displayUserData(authUser)
     }
 
-    fun setListenerToUserPosts(user: User){
-        val reference = dbRealtime.getReference("/user-posts/${user.id}")
+    private fun setListenerToUserPosts(){
+        val reference = dbRealtime.getReference("/user-posts/${authUser.id}")
         reference.addChildEventListener(object : ChildEventListener {
             override fun onCancelled(p0: DatabaseError) {}
             override fun onChildMoved(p0: DataSnapshot, p1: String?) {}

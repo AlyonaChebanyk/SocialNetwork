@@ -5,6 +5,7 @@ import com.arellomobile.mvp.MvpPresenter
 import com.example.socialnetwork.adapters.LatestMessagesAdapter
 import com.example.socialnetwork.entities.Message
 import com.example.socialnetwork.entities.User
+import com.example.socialnetwork.repository.Repository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
@@ -16,16 +17,20 @@ class LatestMessagesPresenter: MvpPresenter<LatestMessagesView>() {
 
     private val dbRealtime = FirebaseDatabase.getInstance()
     private val dbAuth = FirebaseAuth.getInstance()
-    private lateinit var adapter: LatestMessagesAdapter
+    private val adapter = LatestMessagesAdapter()
+
+    val authUser = Repository.currentUser!!
 
     val latestMessagesHashMap: HashMap<String, Message> = hashMapOf()
 
-    fun setAdapter(authUser: User){
-        adapter = LatestMessagesAdapter(authUser)
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
         viewState.setAdapter(adapter)
+        setListener()
     }
 
-    fun setListener(authUser: User){
+
+    private fun setListener(){
         val ref = dbRealtime.getReference("/latest-messages/${dbAuth.currentUser!!.uid}")
         ref.addChildEventListener(object : ChildEventListener {
             override fun onChildAdded(p0: DataSnapshot, p1: String?) {

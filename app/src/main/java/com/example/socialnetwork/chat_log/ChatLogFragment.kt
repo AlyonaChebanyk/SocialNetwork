@@ -13,6 +13,7 @@ import com.example.socialnetwork.R
 import com.example.socialnetwork.adapters.ChatLogAdapter
 import com.example.socialnetwork.entities.Message
 import com.example.socialnetwork.entities.User
+import com.example.socialnetwork.repository.Repository
 import com.google.api.Distribution
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ChildEventListener
@@ -39,16 +40,15 @@ class ChatLogFragment : MvpAppCompatFragment(), ChatLogView {
 
         activity!!.bottom_navigation.visibility = View.GONE
 
-        val authUser = arguments!!.getParcelable<User>("authUser")!!
         val secondUser = arguments?.getParcelable<User>("user")!!
 
-        presenter.setAdapter(authUser, secondUser)
-        presenter.setListener(authUser, secondUser)
+        presenter.setAdapter(secondUser)
+        presenter.setListener(secondUser)
 
         sendMessageButton.setOnClickListener {
             val messageText = messageEditText.text.toString()
             if (messageText.isNotEmpty())
-                presenter.sendMessage(messageText, authUser, secondUser)
+                presenter.sendMessage(messageText, secondUser)
 
         }
 

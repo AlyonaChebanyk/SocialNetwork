@@ -6,6 +6,7 @@ import com.arellomobile.mvp.MvpPresenter
 import com.example.socialnetwork.adapters.ChatLogAdapter
 import com.example.socialnetwork.entities.Message
 import com.example.socialnetwork.entities.User
+import com.example.socialnetwork.repository.Repository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
@@ -13,19 +14,21 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_chat_log.*
+import java.util.*
 
 @InjectViewState
 class ChatLogPresenter : MvpPresenter<ChatLogView>() {
 
     private val dbRealtime = FirebaseDatabase.getInstance()
     private lateinit var adapter: ChatLogAdapter
+    val authUser: User = Repository.currentUser!!
 
-    fun setAdapter(authUser: User, secondUser: User) {
-        adapter = ChatLogAdapter(authUser, secondUser)
+    fun setAdapter(secondUser: User) {
+        adapter = ChatLogAdapter(secondUser)
         viewState.setAdapter(adapter)
     }
 
-    fun setListener(authUser: User, secondUser: User){
+    fun setListener(secondUser: User){
         val messagesRef = dbRealtime.getReference("/messages/${authUser.id}/${secondUser.id}")
         messagesRef.addChildEventListener(object : ChildEventListener {
             override fun onChildAdded(p0: DataSnapshot, p1: String?) {
@@ -41,14 +44,16 @@ class ChatLogPresenter : MvpPresenter<ChatLogView>() {
         })
     }
 
-    fun sendMessage(messageText: String, authUser: User, secondUser: User) {
+    fun sendMessage(messageText: String, secondUser: User) {
 
         val fromId = authUser.id
         val toId = secondUser.id
 
         val reference = dbRealtime.getReference("/messages/$fromId/$toId").push()
+//        val chatMessage =
+//            Message(reference.key!!, messageText, fromId, toId, System.currentTimeMillis() / 1000)
         val chatMessage =
-            Message(reference.key!!, messageText, fromId, toId, System.currentTimeMillis() / 1000)
+            Message(reference.key!!, messageText, fromId, toId, Calendar.getInstance().time.time)
         reference.setValue(chatMessage)
 
         val reference2 = dbRealtime.getReference("/messages/$toId/$fromId").push()

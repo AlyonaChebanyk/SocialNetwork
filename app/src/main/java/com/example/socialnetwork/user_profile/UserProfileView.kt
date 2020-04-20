@@ -8,5 +8,4 @@ interface UserProfileView: MvpView {
 
     fun displayUserData(user: User)
     fun setAdapter(postAdapter: PostAdapter)
-
 }

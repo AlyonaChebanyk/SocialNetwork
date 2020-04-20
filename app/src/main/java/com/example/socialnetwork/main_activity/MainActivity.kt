@@ -10,6 +10,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.example.socialnetwork.R
 import com.example.socialnetwork.entities.User
+import com.example.socialnetwork.repository.Repository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
@@ -26,15 +27,6 @@ class MainActivity : MvpAppCompatActivity(){
 
         bottom_navigation.setupWithNavController(Navigation.findNavController(this, R.id.nav_host_fragment))
 
-//        dbFirestore.collection("users").document(dbAuth.currentUser!!.uid).get()
-//            .addOnSuccessListener { document ->
-//                val authUser = User(
-//                    document.id,
-//                    document.data!!["full_name"] as String,
-//                    document.data!!["user_name"] as String,
-//                    document.data!!["picture"] as String
-//                )
-//            }
     }
 
 
@@ -47,6 +39,7 @@ class MainActivity : MvpAppCompatActivity(){
         when (item.itemId) {
             R.id.logOut -> {
                 dbAuth.signOut()
+                Repository.currentUser = null
                 findNavController(R.id.nav_host_fragment).navigate(
                     R.id.singInFragment
                 )
