@@ -21,7 +21,14 @@ class ChatLogPresenter : MvpPresenter<ChatLogView>() {
 
     private val dbRealtime = FirebaseDatabase.getInstance()
     private lateinit var adapter: ChatLogAdapter
-    val authUser: User = Repository.currentUser!!
+    private val authUser: User = Repository.currentUser!!
+
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
+        viewState.setListenerToSendMessageButton()
+        viewState.displaySecondUserName()
+        viewState.setListenerToGotoLatestMessagesButton()
+    }
 
     fun setAdapter(secondUser: User) {
         adapter = ChatLogAdapter(secondUser)

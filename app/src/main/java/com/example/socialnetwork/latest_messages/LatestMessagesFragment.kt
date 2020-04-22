@@ -17,15 +17,13 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_latest_messages.*
 
 class LatestMessagesFragment : MvpAppCompatFragment(), LatestMessagesView {
 
     @InjectPresenter
     lateinit var presenter: LatestMessagesPresenter
-
-    private val dbFirestore = FirebaseFirestore.getInstance()
-    private val dbAuth = FirebaseAuth.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,8 +34,8 @@ class LatestMessagesFragment : MvpAppCompatFragment(), LatestMessagesView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
+        requireActivity().toolbar.visibility = View.GONE
+        requireActivity().bottom_navigation.visibility = View.VISIBLE
     }
 
     override fun setAdapter(latestMessagesAdapter: LatestMessagesAdapter) {

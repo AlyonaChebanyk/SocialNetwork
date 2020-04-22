@@ -9,5 +9,8 @@ interface ChatLogView: MvpView {
     fun setAdapter(chatLogAdapter: ChatLogAdapter)
     fun scrollToPosition(position: Int)
     fun clearMessageText()
+    fun setListenerToSendMessageButton()
+    fun displaySecondUserName()
+    fun setListenerToGotoLatestMessagesButton()
 
 }

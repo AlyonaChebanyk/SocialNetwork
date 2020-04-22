@@ -24,9 +24,6 @@ class SearchFragment : MvpAppCompatFragment(), SearchView {
     @InjectPresenter
     lateinit var presenter: SearchPresenter
 
-    private val dbFirestore = FirebaseFirestore.getInstance()
-    private val dbAuth = FirebaseAuth.getInstance()
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,15 +34,9 @@ class SearchFragment : MvpAppCompatFragment(), SearchView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        activity!!.toolbar.visibility = View.GONE
+        requireActivity().toolbar.visibility = View.GONE
+        requireActivity().bottom_navigation.visibility = View.VISIBLE
 
-        searchEditText.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(p0: Editable?) {}
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-            override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                presenter.updateSearchList(text.toString())
-            }
-        })
     }
 
     override fun setAdapter(searchAdapter: SearchAdapter) {
@@ -53,5 +44,15 @@ class SearchFragment : MvpAppCompatFragment(), SearchView {
             layoutManager = LinearLayoutManager(activity)
             adapter = searchAdapter
         }
+    }
+
+    override fun setTextChangedListener() {
+        searchEditText.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {}
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                presenter.updateSearchList(text.toString())
+            }
+        })
     }
 }

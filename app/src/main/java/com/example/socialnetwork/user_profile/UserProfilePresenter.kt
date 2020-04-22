@@ -24,6 +24,7 @@ class UserProfilePresenter : MvpPresenter<UserProfileView>() {
         viewState.setAdapter(adapter)
         displayUserData()
         setListenerToUserPosts()
+        viewState.setListenerToAddPostButton()
     }
 
     private fun displayUserData(){
@@ -39,6 +40,7 @@ class UserProfilePresenter : MvpPresenter<UserProfileView>() {
             override fun onChildAdded(p0: DataSnapshot, p1: String?) {
                 val post = p0.getValue(Post::class.java)
                 adapter.addPost(post!!)
+                viewState.scrollToPosition(0)
             }
             override fun onChildRemoved(p0: DataSnapshot) {}
         })

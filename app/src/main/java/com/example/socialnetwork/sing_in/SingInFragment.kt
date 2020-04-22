@@ -37,8 +37,8 @@ class SingInFragment : MvpAppCompatFragment(), SingInView {
         savedInstanceState: Bundle?
     ): View? {
 
-        activity!!.bottom_navigation.visibility = View.GONE
-        activity!!.toolbar.visibility = View.GONE
+        requireActivity().bottom_navigation.visibility = View.GONE
+        requireActivity().toolbar.visibility = View.GONE
 
         return inflater.inflate(R.layout.fragment_sing_in, container, false)
     }

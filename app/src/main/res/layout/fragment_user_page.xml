@@ -1,101 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <FrameLayout
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="50dp"
+        android:background="@color/baseAppColor" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@color/baseAppColor" />
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/userImage"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            app:civ_border_color="@color/white"
-            android:layout_gravity="start"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="60dp" />
-    </FrameLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <TextView
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="160dp"
-            android:id="@+id/userNameTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:fontFamily="@font/secular_one"
-            android:text="Name"
-            android:textColor="#14171A"
-            android:textSize="25sp" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <com.google.android.material.chip.Chip
-            style="@style/Widget.MaterialComponents.Chip.Entry"
-            app:closeIconVisible="false"
-            android:id="@+id/followUserChip"
-            android:text="follow"
-            android:layout_marginTop="110dp"
-            android:gravity="center_horizontal"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginRight="20dp"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"/>
+        <ImageButton
+            android:id="@+id/goToMainPageButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/ic_arrow_back_white_24dp" />
 
-        <TextView
-            app:layout_constraintTop_toBottomOf="@id/userNameTextView"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:id="@+id/userLoginTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="15dp"
-            android:fontFamily="@font/glegoo"
-            android:text="login"
-            android:textSize="18sp" />
-
-        <View
-            app:layout_constraintTop_toBottomOf="@id/userLoginTextView"
-            android:layout_marginTop="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#DDD" />
-
-        <FrameLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="50dp">
+            android:layout_marginTop="-1dp">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_marginTop="280dp"
-                android:id="@+id/postListRecyclerView"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:listitem="@layout/post_item" />
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/writeMessageButton"
-                android:layout_width="70dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end"
-                android:layout_margin="20dp"
-                android:backgroundTint="@color/baseAppColor"
-                android:src="@drawable/ic_message_black_24dp"/>
-        </FrameLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                android:orientation="horizontal">
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:background="@color/baseAppColor"
+                    app:layout_constraintTop_toTopOf="parent" />
 
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/userImage"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="20dp"
+                    android:background="@drawable/ic_person_black_24dp"
+                    app:civ_border_color="@color/white"
+                    app:civ_border_width="4dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+                <TextView
+                    android:id="@+id/userNameTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/secular_one"
+                    android:paddingTop="20dp"
+                    android:text="Name"
+                    android:textColor="#14171A"
+                    android:textSize="20sp"
+                    app:layout_constraintLeft_toRightOf="@id/userImage"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/followUserChip"
+                    style="@style/Widget.MaterialComponents.Chip.Entry"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="35dp"
+                    android:gravity="center_horizontal"
+                    android:text="follow"
+                    app:closeIconVisible="false"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/userLoginTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/glegoo"
+                    android:text=""
+                    android:textSize="18sp"
+                    app:layout_constraintLeft_toRightOf="@id/userImage"
+                    app:layout_constraintTop_toBottomOf="@id/userNameTextView" />
+
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#DDD"
+                    app:layout_constraintTop_toBottomOf="@id/userImage" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/postListRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/view2"
+                    tools:listitem="@layout/post_item"
+                    android:nestedScrollingEnabled="false"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/writeMessageButton"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="20dp"
+        android:backgroundTint="@color/baseAppColor"
+        android:src="@drawable/ic_message_black_24dp"
+        app:borderWidth="0dp" />
+
+</FrameLayout>
+

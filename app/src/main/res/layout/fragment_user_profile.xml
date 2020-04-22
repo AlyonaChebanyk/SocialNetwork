@@ -7,66 +7,77 @@
     android:orientation="vertical"
     android:paddingBottom="50dp">
 
-    <View
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@color/baseAppColor" />
+        android:layout_height="match_parent">
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:padding="10dp"
-        android:src="@drawable/ic_arrow_back_white_24dp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/userImage"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            android:layout_gravity="start"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="50dp"
-            app:civ_border_color="@color/white"
-            app:civ_border_width="4dp" />
-
-        <TextView
-            android:id="@+id/userNameTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:fontFamily="@font/secular_one"
-            android:text="Name"
-            android:textColor="#14171A"
-            android:textSize="24sp" />
-
-        <TextView
-            android:id="@+id/userLoginTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="15dp"
-            android:fontFamily="@font/glegoo"
-            android:text="login"
-            android:textSize="18sp" />
-
-        <View
-            android:id="@+id/view2"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#DDD" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/postListRecyclerView"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/post_item" />
+            android:orientation="horizontal">
 
-    </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="@color/baseAppColor"
+                app:layout_constraintTop_toTopOf="parent" />
 
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/userImage"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_gravity="start"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/ic_person_black_24dp"
+                app:civ_border_color="@color/white"
+                app:civ_border_width="4dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/userNameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="50dp"
+                android:fontFamily="@font/secular_one"
+                android:paddingTop="20dp"
+                android:text="Name"
+                android:textColor="#14171A"
+                android:textSize="20sp"
+                app:layout_constraintLeft_toRightOf="@id/userImage"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/userLoginTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/glegoo"
+                android:text=""
+                android:textSize="18sp"
+                app:layout_constraintLeft_toRightOf="@id/userImage"
+                app:layout_constraintTop_toBottomOf="@id/userNameTextView" />
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#DDD"
+                app:layout_constraintTop_toBottomOf="@id/userImage" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/postListRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                app:layout_constraintTop_toBottomOf="@id/view2"
+                tools:listitem="@layout/post_item"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addPostButton"
@@ -75,6 +86,8 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="20dp"
         android:backgroundTint="@color/baseAppColor"
-        android:src="@drawable/ic_create_white_24dp" />
+        android:src="@drawable/ic_create_white_24dp"
+        app:borderWidth="0dp" />
 
 </FrameLayout>
+

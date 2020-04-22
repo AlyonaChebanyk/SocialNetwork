@@ -13,16 +13,14 @@ import com.example.socialnetwork.R
 import com.example.socialnetwork.adapters.PostAdapter
 import com.example.socialnetwork.entities.User
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_user_page.*
-import kotlinx.android.synthetic.main.fragment_user_profile.postListRecyclerView
-import kotlinx.android.synthetic.main.fragment_user_profile.userImage
-import kotlinx.android.synthetic.main.fragment_user_profile.userLoginTextView
-import kotlinx.android.synthetic.main.fragment_user_profile.userNameTextView
 
 class UserPageFragment : MvpAppCompatFragment(), UserPageView {
 
     @InjectPresenter
     lateinit var presenter: UserPagePresenter
+    lateinit var userCurrentPage: User
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,21 +32,39 @@ class UserPageFragment : MvpAppCompatFragment(), UserPageView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val userCurrentPage = arguments!!.getParcelable<User>("user")!!
+        requireActivity().toolbar.visibility = View.VISIBLE
+        requireActivity().bottom_navigation.visibility = View.GONE
+
+        userCurrentPage = requireArguments().getParcelable<User>("user")!!
 
         presenter.displayUserData(userCurrentPage)
-        presenter.setListener(userCurrentPage)
+        presenter.setListenerToUserPosts(userCurrentPage)
         presenter.checkChipFollowed(userCurrentPage)
 
-        followUserChip.setOnCheckedChangeListener { buttonView, isChecked ->
+    }
+
+    override fun scrollToPosition(position: Int) {
+        postListRecyclerView.smoothScrollToPosition(position)
+    }
+
+    override fun setListenerToGoToMainPageButton() {
+        goToMainPageButton.setOnClickListener {
+            findNavController().navigate(R.id.action_userPageFragment_to_homeFragment)
+        }
+    }
+
+    override fun setListenerToFollowUserChip() {
+
+        followUserChip.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 presenter.addToFollowings(userCurrentPage)
             } else {
                 presenter.removeFromFollowings(userCurrentPage)
             }
-
         }
+    }
 
+    override fun setListenerToWriteMessageButton() {
         writeMessageButton.setOnClickListener {
             val bundle = bundleOf("user" to userCurrentPage)
             findNavController().navigate(R.id.action_userPageFragment_to_chatLogFragment, bundle)
@@ -61,7 +77,7 @@ class UserPageFragment : MvpAppCompatFragment(), UserPageView {
             .into(userImage)
 
         userNameTextView.text = user.fullName
-        userLoginTextView.text = "@" + user.userName
+//        userLoginTextView.text = "@" + user.userName
 
     }
 

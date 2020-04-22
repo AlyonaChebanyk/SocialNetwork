@@ -10,6 +10,7 @@
         android:id="@+id/userImageComment"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:background="@drawable/ic_person_black_24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -20,6 +21,8 @@
         android:layout_marginStart="10dp"
         android:text="User Name"
         android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/userImageComment"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,20 +30,38 @@
         android:id="@+id/userLoginCommentTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="login"
         android:layout_marginStart="10dp"
+        android:text="login"
+        android:textSize="15sp"
         app:layout_constraintStart_toEndOf="@+id/userNameCommentTextView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/commentDateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:text="a moment ago"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/commentTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Comment text"
-        android:layout_marginTop="15dp"
         android:layout_marginStart="60dp"
+        android:text="Comment text"
+        android:lineSpacingMultiplier="1.2"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userNameCommentTextView"
         tools:layout_editor_absoluteX="10dp" />
+
+    <View
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/commentTextView"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#CCC"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

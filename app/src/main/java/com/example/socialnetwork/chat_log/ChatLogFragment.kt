@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -29,6 +30,8 @@ class ChatLogFragment : MvpAppCompatFragment(), ChatLogView {
     @InjectPresenter
     lateinit var presenter: ChatLogPresenter
 
+    lateinit var secondUser: User
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,20 +41,35 @@ class ChatLogFragment : MvpAppCompatFragment(), ChatLogView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        activity!!.bottom_navigation.visibility = View.GONE
+        requireActivity().bottom_navigation.visibility = View.GONE
+        requireActivity().toolbar.visibility = View.GONE
 
-        val secondUser = arguments?.getParcelable<User>("user")!!
+        secondUser = requireArguments().getParcelable<User>("user")!!
 
         presenter.setAdapter(secondUser)
         presenter.setListener(secondUser)
 
+    }
+
+    override fun setListenerToGotoLatestMessagesButton() {
+        goToLatestMessagesButton.setOnClickListener {
+            goToLatestMessagesButton.setOnClickListener {
+                findNavController().navigate(R.id.action_chatLogFragment_to_latestMessagesFragment)
+            }
+        }
+    }
+
+    override fun displaySecondUserName() {
+        secondUserNameTextView.text = secondUser.fullName
+    }
+
+    override fun setListenerToSendMessageButton() {
         sendMessageButton.setOnClickListener {
             val messageText = messageEditText.text.toString()
             if (messageText.isNotEmpty())
                 presenter.sendMessage(messageText, secondUser)
 
         }
-
     }
 
     override fun setAdapter(chatLogAdapter: ChatLogAdapter) {

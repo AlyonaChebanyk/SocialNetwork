@@ -23,9 +23,6 @@ class HomeFragment : MvpAppCompatFragment(), HomeView {
     @InjectPresenter
     lateinit var presenter: HomePresenter
 
-    private val dbFirestore = FirebaseFirestore.getInstance()
-    private val dbAuth = FirebaseAuth.getInstance()
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,7 +33,8 @@ class HomeFragment : MvpAppCompatFragment(), HomeView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        activity!!.toolbar.visibility = View.GONE
+        requireActivity().toolbar.visibility = View.VISIBLE
+        requireActivity().bottom_navigation.visibility = View.VISIBLE
 
         authUserImageView.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_userProfileFragment)

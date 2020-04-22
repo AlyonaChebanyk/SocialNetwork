@@ -11,12 +11,19 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_post_page.*
+import java.util.*
 
 @InjectViewState
 class PostPagePresenter : MvpPresenter<PostPageView>(){
 
     private val dbRealtime = FirebaseDatabase.getInstance()
     lateinit var adapter: CommentAdapter
+
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
+        viewState.setListenerToAddCommentButton()
+        viewState.setListenerToBackButton()
+    }
 
     fun setAdapter(user: User){
         adapter = CommentAdapter(user)
@@ -39,7 +46,7 @@ class PostPagePresenter : MvpPresenter<PostPageView>(){
 
     fun addComment(commentText: String, user: User, post: Post){
         val ref = dbRealtime.getReference("/user-posts/${user.id}/${post.postId}/comments").push()
-        val comment = Comment(post.postId, commentText)
+        val comment = Comment(post.postId, commentText, Calendar.getInstance().timeInMillis)
         ref.setValue(comment)
         viewState.clearCommentText()
     }

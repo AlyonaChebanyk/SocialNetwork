@@ -36,6 +36,9 @@
         <action
             android:id="@+id/action_userPageFragment_to_postPage"
             app:destination="@id/postPage" />
+        <action
+            android:id="@+id/action_userPageFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -62,7 +65,11 @@
         android:id="@+id/chatLogFragment"
         android:name="com.example.socialnetwork.chat_log.ChatLogFragment"
         android:label="fragment_chat_log"
-        tools:layout="@layout/fragment_chat_log" />
+        tools:layout="@layout/fragment_chat_log" >
+        <action
+            android:id="@+id/action_chatLogFragment_to_latestMessagesFragment"
+            app:destination="@id/latestMessagesFragment" />
+    </fragment>
     <fragment
         android:id="@+id/postPage"
         android:name="com.example.socialnetwork.post_page.PostPageFragment"
@@ -71,7 +78,8 @@
     <fragment
         android:id="@+id/singInFragment"
         android:name="com.example.socialnetwork.sing_in.SingInFragment"
-        android:label="SingInFragment" >
+        android:label="SingInFragment"
+        tools:layout="@layout/fragment_sing_in">
         <action
             android:id="@+id/action_singInFragment_to_userProfileFragment"
             app:destination="@id/userProfileFragment" />

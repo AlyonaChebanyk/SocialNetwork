@@ -10,29 +10,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="#EEE">
         <ImageView
             android:layout_marginTop="15dp"
-            android:id="@+id/userImage"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:src="@drawable/ic_search_black_24dp"
+            android:layout_height="30dp"
             android:layout_weight="1"/>
 
-        <com.google.android.material.textfield.TextInputLayout
+        <EditText
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:id="@+id/searchEditText"
             android:layout_width="0dp"
             android:layout_weight="5"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            app:boxCornerRadiusBottomEnd="10dp"
-            app:boxCornerRadiusBottomStart="10dp"
-            app:boxCornerRadiusTopEnd="10dp"
-            app:boxCornerRadiusTopStart="10dp">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/searchEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </com.google.android.material.textfield.TextInputLayout>
+            android:textSize="18dp">
+        </EditText>
 
     </LinearLayout>
 
@@ -40,6 +35,7 @@
         android:id="@+id/searchListRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/person_item"/>
+        tools:listitem="@layout/person_item"
+        android:paddingBottom="50dp"/>
 
 </LinearLayout>

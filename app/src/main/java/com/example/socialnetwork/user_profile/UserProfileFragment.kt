@@ -35,27 +35,29 @@ class UserProfileFragment : MvpAppCompatFragment(), UserProfileView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        activity!!.toolbar.visibility = View.VISIBLE
-        activity!!.bottom_navigation.visibility = View.VISIBLE
+        requireActivity().toolbar.visibility = View.GONE
+        requireActivity().bottom_navigation.visibility = View.VISIBLE
 
+    }
+
+    override fun setListenerToAddPostButton() {
         addPostButton.setOnClickListener {
             if (bottomSheet.isAdded) {
                 bottomSheet.dialog?.show()
             } else {
-                bottomSheet.show(activity!!.supportFragmentManager, "TAG")
+                bottomSheet.show(requireActivity().supportFragmentManager, "TAG")
             }
         }
-
     }
 
     override fun displayUserData(user: User) {
         Picasso.get()
             .load(user.picture)
-            .resize(280, 280)
+            .resize(300, 300)
             .into(userImage)
 
         userNameTextView.text = user.fullName
-        userLoginTextView.text = "@" + user.userName
+//        userLoginTextView.text = "@" + user.userName
     }
 
     override fun setAdapter(postAdapter: PostAdapter) {
@@ -63,6 +65,10 @@ class UserProfileFragment : MvpAppCompatFragment(), UserProfileView {
             layoutManager = LinearLayoutManager(activity)
             adapter = postAdapter
         }
+    }
+
+    override fun scrollToPosition(position: Int) {
+        postListRecyclerView.smoothScrollToPosition(0)
     }
 
 }

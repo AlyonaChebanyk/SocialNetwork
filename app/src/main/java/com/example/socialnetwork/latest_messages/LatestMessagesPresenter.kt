@@ -19,8 +19,6 @@ class LatestMessagesPresenter: MvpPresenter<LatestMessagesView>() {
     private val dbAuth = FirebaseAuth.getInstance()
     private val adapter = LatestMessagesAdapter()
 
-    val authUser = Repository.currentUser!!
-
     val latestMessagesHashMap: HashMap<String, Message> = hashMapOf()
 
     override fun onFirstViewAttach() {

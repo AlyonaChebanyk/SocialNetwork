@@ -5,15 +5,46 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".chat_log.ChatLogFragment"
-    android:background="@color/baseAppColor">
+    android:background="#EEE">
+
+    <FrameLayout
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/baseAppColor"/>
+
+        <ImageButton
+            android:id="@+id/goToLatestMessagesButton"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="5dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/ic_arrow_back_white_24dp"/>
+
+        <TextView
+            android:id="@+id/secondUserNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="User Name"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="12dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
+    </FrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="50dp"
         android:id="@+id/chatLogRecyclerView"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="80dp"/>
+        android:paddingBottom="80dp"
+        tools:listitem="@layout/message_item_right_side"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -25,13 +56,14 @@
 
         <EditText
             android:id="@+id/messageEditText"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_gravity="start"
-            android:layout_margin="5dp"
+            android:layout_marginStart="5dp"
             android:backgroundTint="@color/white"
             android:hint="Enter Message"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/sendMessageButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

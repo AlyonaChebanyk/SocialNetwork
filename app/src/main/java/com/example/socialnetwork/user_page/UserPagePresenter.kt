@@ -19,19 +19,22 @@ class UserPagePresenter : MvpPresenter<UserPageView>() {
 
     private val dbFirestore = FirebaseFirestore.getInstance()
     private val dbRealtime = FirebaseDatabase.getInstance()
-    val authUser = Repository.currentUser!!
+    private val authUser = Repository.currentUser!!
     val adapter = PostAdapter()
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         viewState.setAdapter(adapter)
+        viewState.setListenerToWriteMessageButton()
+        viewState.setListenerToFollowUserChip()
+        viewState.setListenerToGoToMainPageButton()
     }
 
     fun displayUserData(userCurrentPage: User) {
         viewState.displayUserData(userCurrentPage)
     }
 
-    fun setListener(userCurrentPage: User) {
+    fun setListenerToUserPosts(userCurrentPage: User) {
         val reference = dbRealtime.getReference("/user-posts/${userCurrentPage.id}")
         reference.addChildEventListener(object : ChildEventListener {
             override fun onCancelled(p0: DatabaseError) {}
@@ -40,6 +43,7 @@ class UserPagePresenter : MvpPresenter<UserPageView>() {
             override fun onChildAdded(p0: DataSnapshot, p1: String?) {
                 val post = p0.getValue(Post::class.java)
                 adapter.addPost(post!!)
+                viewState.scrollToPosition(0)
             }
 
             override fun onChildRemoved(p0: DataSnapshot) {}

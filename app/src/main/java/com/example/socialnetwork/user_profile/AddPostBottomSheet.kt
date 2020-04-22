@@ -23,6 +23,7 @@ import kotlinx.android.synthetic.main.bottom_sheet.*
 import java.io.ByteArrayOutputStream
 import java.io.FileNotFoundException
 import java.io.InputStream
+import java.util.*
 import kotlin.collections.ArrayList
 
 class AddPostBottomSheet : BottomSheetDialogFragment() {
@@ -52,8 +53,7 @@ class AddPostBottomSheet : BottomSheetDialogFragment() {
 
                 val reference = dbRealtime.getReference("/user-posts/${user.id}").push()
 
-                if (postImageUri!=null){
-
+                if (postImageUri != null) {
 
                     val storageRef = dbStorage.reference
                     val imageRef: StorageReference = storageRef.child(reference.key!!)
@@ -63,7 +63,13 @@ class AddPostBottomSheet : BottomSheetDialogFragment() {
                         imageRef.downloadUrl.addOnSuccessListener { it2 ->
                             val postImageUrl = it2.toString()
 
-                            val userPost = Post(reference.key!!, user.id, postEditText.text.toString(), postImageUrl)
+                            val userPost = Post(
+                                reference.key!!,
+                                user.id,
+                                postEditText.text.toString(),
+                                postImageUrl,
+                                timestamp = Calendar.getInstance().timeInMillis
+                            )
                             reference.setValue(userPost)
 
                             postEditText.text.clear()
@@ -71,10 +77,13 @@ class AddPostBottomSheet : BottomSheetDialogFragment() {
                             dbFirestore.collection("users").get()
                                 .addOnSuccessListener { documents ->
                                     for (document in documents) {
-                                        val following = document.data["following"] as ArrayList<String>
+                                        val following =
+                                            document.data["following"] as ArrayList<String>
                                         if (following.contains(user.id)) {
                                             val userId = document.id
-                                            val ref = dbRealtime.getReference("/following-posts/$userId").push()
+                                            val ref =
+                                                dbRealtime.getReference("/following-posts/$userId")
+                                                    .push()
                                             ref.setValue(userPost)
                                         }
                                     }
@@ -83,8 +92,13 @@ class AddPostBottomSheet : BottomSheetDialogFragment() {
 
                     }
 
-                }else{
-                    val userPost = Post(reference.key!!, user.id, postEditText.text.toString())
+                } else {
+                    val userPost = Post(
+                        reference.key!!,
+                        user.id,
+                        postEditText.text.toString(),
+                        timestamp = Calendar.getInstance().timeInMillis
+                    )
                     reference.setValue(userPost)
 
                     dbFirestore.collection("users").get()
@@ -93,7 +107,8 @@ class AddPostBottomSheet : BottomSheetDialogFragment() {
                                 val following = document.data["following"] as ArrayList<String>
                                 if (following.contains(user.id)) {
                                     val userId = document.id
-                                    val ref = dbRealtime.getReference("/following-posts/$userId").push()
+                                    val ref =
+                                        dbRealtime.getReference("/following-posts/$userId").push()
                                     ref.setValue(userPost)
                                 }
                             }
@@ -120,6 +135,7 @@ class AddPostBottomSheet : BottomSheetDialogFragment() {
         if (resultCode == Activity.RESULT_OK) {
             try {
                 postImageUri = data?.data
+                postImage.setImageURI(postImageUri)
 
             } catch (e: FileNotFoundException) {
                 e.printStackTrace()

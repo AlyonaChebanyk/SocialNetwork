@@ -14,8 +14,8 @@ import kotlinx.android.synthetic.main.latest_message_item.view.*
 
 class LatestMessagesViewHolder(val view: View): RecyclerView.ViewHolder(view) {
 
-    val dbFirestore = FirebaseFirestore.getInstance()
-    val dbAuth = FirebaseAuth.getInstance()
+    private val dbFirestore = FirebaseFirestore.getInstance()
+    private val dbAuth = FirebaseAuth.getInstance()
     lateinit var displayUserId: String
 
     fun bind(message: Message){

@@ -13,15 +13,15 @@ import com.google.firebase.firestore.FirebaseFirestore
 class SearchPresenter : MvpPresenter<SearchView>() {
 
     private val dbFirestore = FirebaseFirestore.getInstance()
-    private val dbAuth = FirebaseAuth.getInstance()
     private val adapter = SearchAdapter()
     private val fullUserList = arrayListOf<User>()
-    val authUser = Repository.currentUser
+    private val authUser = Repository.currentUser!!
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
 
         viewState.setAdapter(adapter)
+        viewState.setTextChangedListener()
 
         dbFirestore.collection("users").get()
             .addOnSuccessListener { documents ->
@@ -32,7 +32,7 @@ class SearchPresenter : MvpPresenter<SearchView>() {
                         document.data["user_name"] as String,
                         document.data["picture"] as String
                     )
-                    if (currentUser.id != dbAuth.currentUser!!.uid){
+                    if (currentUser.id != authUser.id){
                         fullUserList.add(currentUser)
                         adapter.addUser(currentUser)
                     }

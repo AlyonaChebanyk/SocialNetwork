@@ -18,7 +18,7 @@ class HomePresenter : MvpPresenter<HomeView>() {
 
     private val dbRealtime = FirebaseDatabase.getInstance()
     private val adapter = PostAdapter(true)
-    val authUser = Repository.currentUser!!
+    private val authUser = Repository.currentUser!!
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()

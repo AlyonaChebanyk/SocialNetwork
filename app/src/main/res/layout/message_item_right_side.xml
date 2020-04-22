@@ -8,13 +8,13 @@
         android:id="@+id/userRightImage"
         android:layout_margin="10dp"
         android:paddingTop="10dp"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/ic_person_black_24dp"/>
 
     <com.google.android.material.textview.MaterialTextView
-        android:gravity="end"
         android:layout_margin="10dp"
         android:id="@+id/messageRightTextView"
         android:layout_width="wrap_content"

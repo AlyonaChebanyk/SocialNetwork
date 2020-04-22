@@ -13,13 +13,14 @@ class LatestMessagesAdapter() :
     private val latestMessagesList: MutableList<Message> = arrayListOf()
 
     fun addMessage(message: Message){
-        latestMessagesList.add(message)
-        notifyItemInserted(latestMessagesList.size-1)
+        latestMessagesList.add(0, message)
+        notifyItemInserted(0)
     }
 
     fun setMessageList(messageList: MutableList<Message>){
         latestMessagesList.clear()
-        latestMessagesList.addAll(messageList)
+        val sortedList = messageList.sortedWith(compareBy {it.timestamp})
+        latestMessagesList.addAll(sortedList)
         notifyDataSetChanged()
     }
 

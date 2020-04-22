@@ -15,8 +15,8 @@ import timber.log.Timber
 object Repository {
     var currentUser: User? = null
 
-    val dbAuth = FirebaseAuth.getInstance()
-    val dbFirestore = FirebaseFirestore.getInstance()
+    private val dbAuth = FirebaseAuth.getInstance()
+    private val dbFirestore = FirebaseFirestore.getInstance()
 
     @SuppressLint("CheckResult")
     fun uploadUsers(amount: Int = 10) {

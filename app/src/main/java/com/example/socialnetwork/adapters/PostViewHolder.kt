@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.socialnetwork.entities.Post
 import com.example.socialnetwork.entities.User
 import com.example.socialnetwork.R
+import com.example.socialnetwork.entities.DateToStringConverter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
@@ -14,6 +15,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.post_item.view.*
 import kotlinx.android.synthetic.main.post_item.view.userImage
 import kotlinx.android.synthetic.main.post_item.view.userNameTextView
+import java.util.*
 
 class PostViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
@@ -40,6 +42,8 @@ class PostViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
                     postContentTextView.text = post.content
                     userNameTextView.text = user.fullName
+                    userLoginTextView.text = "@" + user.userName
+                    postDateTextView.text = DateToStringConverter.getDaysAgo(Date(post.timestamp))
                     if (post.postImageUrl.isNotEmpty()) {
                         Picasso.get()
                             .load(post.postImageUrl)
