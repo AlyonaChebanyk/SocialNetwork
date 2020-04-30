@@ -25,9 +25,6 @@ class UserPagePresenter : MvpPresenter<UserPageView>() {
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         viewState.setAdapter(adapter)
-        viewState.setListenerToWriteMessageButton()
-        viewState.setListenerToFollowUserChip()
-        viewState.setListenerToGoToMainPageButton()
     }
 
     fun displayUserData(userCurrentPage: User) {

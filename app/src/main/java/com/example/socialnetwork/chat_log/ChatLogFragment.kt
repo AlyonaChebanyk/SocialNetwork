@@ -49,14 +49,12 @@ class ChatLogFragment : MvpAppCompatFragment(), ChatLogView {
         presenter.setAdapter(secondUser)
         presenter.setListener(secondUser)
 
-    }
-
-    override fun setListenerToGotoLatestMessagesButton() {
         goToLatestMessagesButton.setOnClickListener {
             goToLatestMessagesButton.setOnClickListener {
                 findNavController().navigate(R.id.action_chatLogFragment_to_latestMessagesFragment)
             }
         }
+
     }
 
     override fun displaySecondUserName() {

@@ -35,8 +35,12 @@ class UserProfileFragment : MvpAppCompatFragment(), UserProfileView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        requireActivity().toolbar.visibility = View.GONE
+        requireActivity().toolbar.visibility = View.VISIBLE
         requireActivity().bottom_navigation.visibility = View.VISIBLE
+
+        for( i in (1..20)){
+            Repository.uploadRandomPost(requireActivity(), true)
+        }
 
     }
 
@@ -57,7 +61,7 @@ class UserProfileFragment : MvpAppCompatFragment(), UserProfileView {
             .into(userImage)
 
         userNameTextView.text = user.fullName
-//        userLoginTextView.text = "@" + user.userName
+        userLoginTextView.text = "@" + user.userName
     }
 
     override fun setAdapter(postAdapter: PostAdapter) {

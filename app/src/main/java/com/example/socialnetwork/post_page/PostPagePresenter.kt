@@ -6,6 +6,7 @@ import com.example.socialnetwork.adapters.CommentAdapter
 import com.example.socialnetwork.entities.Comment
 import com.example.socialnetwork.entities.Post
 import com.example.socialnetwork.entities.User
+import com.example.socialnetwork.repository.Repository
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -17,16 +18,12 @@ import java.util.*
 class PostPagePresenter : MvpPresenter<PostPageView>(){
 
     private val dbRealtime = FirebaseDatabase.getInstance()
-    lateinit var adapter: CommentAdapter
+    private val adapter = CommentAdapter()
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         viewState.setListenerToAddCommentButton()
         viewState.setListenerToBackButton()
-    }
-
-    fun setAdapter(user: User){
-        adapter = CommentAdapter(user)
         viewState.setAdapter(adapter)
     }
 
@@ -46,7 +43,7 @@ class PostPagePresenter : MvpPresenter<PostPageView>(){
 
     fun addComment(commentText: String, user: User, post: Post){
         val ref = dbRealtime.getReference("/user-posts/${user.id}/${post.postId}/comments").push()
-        val comment = Comment(post.postId, commentText, Calendar.getInstance().timeInMillis)
+        val comment = Comment(post.postId, Repository.currentUser!!.id, commentText, Calendar.getInstance().timeInMillis)
         ref.setValue(comment)
         viewState.clearCommentText()
     }

@@ -1,31 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingBottom="50dp"
     tools:context=".home.HomeFragment">
 
-    <ImageView
-        android:id="@+id/authUserImageView"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_margin="15dp"
-        android:background="@drawable/ic_person_black_24dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <View
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#CCC" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/postListHomeRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingBottom="60dp"
-        tools:listitem="@layout/post_item" />
+        <ImageView
+            android:id="@+id/authUserImageView"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_margin="15dp"
+            android:background="@drawable/ic_person_black_24dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#CCC" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/postListHomeRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="60dp"
+            tools:listitem="@layout/post_item"
+            android:nestedScrollingEnabled="false"/>
+    </LinearLayout>
+
+</ScrollView>

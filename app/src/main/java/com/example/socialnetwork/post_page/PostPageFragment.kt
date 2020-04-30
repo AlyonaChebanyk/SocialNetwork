@@ -39,10 +39,9 @@ class PostPageFragment : MvpAppCompatFragment(), PostPageView {
         requireActivity().bottom_navigation.visibility = View.GONE
         requireActivity().toolbar.visibility = View.GONE
 
-        user = requireArguments().getParcelable<User>("user")!!
-        post = requireArguments().getParcelable<Post>("post")!!
+        user = requireArguments().getParcelable("user")!!
+        post = requireArguments().getParcelable("post")!!
 
-        presenter.setAdapter(user)
         presenter.setListener(user, post)
         presenter.displayPostData(user, post)
 

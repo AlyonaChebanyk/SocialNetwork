@@ -3,16 +3,13 @@ package com.example.socialnetwork.main_activity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.core.os.bundleOf
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.example.socialnetwork.R
-import com.example.socialnetwork.entities.User
 import com.example.socialnetwork.repository.Repository
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
 
 

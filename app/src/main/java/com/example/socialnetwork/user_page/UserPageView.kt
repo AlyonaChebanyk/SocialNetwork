@@ -9,8 +9,5 @@ interface UserPageView: MvpView {
     fun displayUserData(user: User)
     fun setAdapter(postAdapter: PostAdapter)
     fun setCheckedChip(check: Boolean)
-    fun setListenerToWriteMessageButton()
-    fun setListenerToFollowUserChip()
-    fun setListenerToGoToMainPageButton()
     fun scrollToPosition(position: Int)
 }

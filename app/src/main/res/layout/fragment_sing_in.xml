@@ -55,6 +55,6 @@
         android:textSize="20sp"
         android:layout_gravity="end|bottom"
         android:textAllCaps="false"
-        android:backgroundTint="@color/baseAppColor"/>
+        android:backgroundTint="@color/colorPrimary"/>
 
 </LinearLayout>

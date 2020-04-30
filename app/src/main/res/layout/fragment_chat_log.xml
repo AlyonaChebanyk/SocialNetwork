@@ -13,12 +13,12 @@
         android:layout_height="wrap_content">
         <View
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/baseAppColor"/>
+            android:layout_height="60dp"
+            android:background="@color/colorPrimary"/>
 
         <ImageButton
             android:id="@+id/goToLatestMessagesButton"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:layout_marginStart="5dp"
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -31,13 +31,13 @@
             android:textSize="20sp"
             android:text="User Name"
             android:layout_marginStart="60dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="16dp"
             android:textColor="@color/white"
             android:textStyle="bold"/>
     </FrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="60dp"
         android:id="@+id/chatLogRecyclerView"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

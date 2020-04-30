@@ -35,25 +35,15 @@ class UserPageFragment : MvpAppCompatFragment(), UserPageView {
         requireActivity().toolbar.visibility = View.VISIBLE
         requireActivity().bottom_navigation.visibility = View.GONE
 
-        userCurrentPage = requireArguments().getParcelable<User>("user")!!
+        userCurrentPage = requireArguments().getParcelable("user")!!
 
         presenter.displayUserData(userCurrentPage)
         presenter.setListenerToUserPosts(userCurrentPage)
         presenter.checkChipFollowed(userCurrentPage)
 
-    }
-
-    override fun scrollToPosition(position: Int) {
-        postListRecyclerView.smoothScrollToPosition(position)
-    }
-
-    override fun setListenerToGoToMainPageButton() {
         goToMainPageButton.setOnClickListener {
             findNavController().navigate(R.id.action_userPageFragment_to_homeFragment)
         }
-    }
-
-    override fun setListenerToFollowUserChip() {
 
         followUserChip.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
@@ -62,13 +52,16 @@ class UserPageFragment : MvpAppCompatFragment(), UserPageView {
                 presenter.removeFromFollowings(userCurrentPage)
             }
         }
-    }
 
-    override fun setListenerToWriteMessageButton() {
         writeMessageButton.setOnClickListener {
             val bundle = bundleOf("user" to userCurrentPage)
             findNavController().navigate(R.id.action_userPageFragment_to_chatLogFragment, bundle)
         }
+
+    }
+
+    override fun scrollToPosition(position: Int) {
+        postListRecyclerView.smoothScrollToPosition(position)
     }
 
     override fun displayUserData(user: User) {
@@ -77,7 +70,7 @@ class UserPageFragment : MvpAppCompatFragment(), UserPageView {
             .into(userImage)
 
         userNameTextView.text = user.fullName
-//        userLoginTextView.text = "@" + user.userName
+        userLoginTextView.text = "@" + user.userName
 
     }
 

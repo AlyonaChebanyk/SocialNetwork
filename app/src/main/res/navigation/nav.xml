@@ -51,6 +51,9 @@
         <action
             android:id="@+id/action_homeFragment_to_userPageFragment"
             app:destination="@id/userPageFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_postPage"
+            app:destination="@id/postPage" />
     </fragment>
     <fragment
         android:id="@+id/latestMessagesFragment"

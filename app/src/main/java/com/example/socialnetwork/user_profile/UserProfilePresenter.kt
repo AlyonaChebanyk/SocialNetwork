@@ -25,6 +25,7 @@ class UserProfilePresenter : MvpPresenter<UserProfileView>() {
         displayUserData()
         setListenerToUserPosts()
         viewState.setListenerToAddPostButton()
+
     }
 
     private fun displayUserData(){

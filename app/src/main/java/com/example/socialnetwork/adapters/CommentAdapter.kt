@@ -7,7 +7,7 @@ import com.example.socialnetwork.R
 import com.example.socialnetwork.entities.Comment
 import com.example.socialnetwork.entities.User
 
-class CommentAdapter(val user: User): RecyclerView.Adapter<CommentViewHolder>() {
+class CommentAdapter(): RecyclerView.Adapter<CommentViewHolder>() {
 
     private val commentList = arrayListOf<Comment>()
 
@@ -22,7 +22,7 @@ class CommentAdapter(val user: User): RecyclerView.Adapter<CommentViewHolder>() 
     }
 
     override fun onBindViewHolder(holder: CommentViewHolder, position: Int) {
-        holder.bind(commentList[position], user)
+        holder.bind(commentList[position])
     }
 
     override fun getItemCount(): Int = commentList.size

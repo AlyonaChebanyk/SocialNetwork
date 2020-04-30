@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_above="@id/bottom_navigation">
 
@@ -25,10 +24,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:itemIconTint="#000"
-        app:itemTextColor="@color/white"
-        android:background="@color/baseAppColor"
+        android:background="@color/white"
         style="@style/Widget.Design.BottomNavigationView"
+        app:itemIconTint="@drawable/bottom_nav_icon_color_selector"
+        app:itemTextColor="@drawable/bottom_nav_icon_color_selector"
         app:menu="@menu/bottom_navigation"/>
 
 </FrameLayout>

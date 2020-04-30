@@ -19,12 +19,12 @@ import java.util.*
 
 class PostViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
-    val db = FirebaseFirestore.getInstance()
+    val dbFirestore = FirebaseFirestore.getInstance()
     val dbAuth = FirebaseAuth.getInstance()
 
     fun bind(post: Post, goToUserPageByClick: Boolean = false) {
 
-        db.collection("users").document(post.userId).get()
+        dbFirestore.collection("users").document(post.userId).get()
             .addOnSuccessListener { document ->
                 val user = User(
                     document.id,
@@ -58,7 +58,7 @@ class PostViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
                             .navigate(R.id.action_userProfileFragment_to_postPage, bundle)
                     } else {
                         view.findNavController()
-                            .navigate(R.id.action_userPageFragment_to_postPage, bundle)
+                            .navigate(R.id.action_homeFragment_to_postPage, bundle)
                     }
 
                 }

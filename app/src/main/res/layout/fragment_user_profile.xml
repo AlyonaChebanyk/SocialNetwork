@@ -19,7 +19,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
-                android:background="@color/baseAppColor"
+                android:background="@color/colorPrimary"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -39,15 +39,13 @@
                 android:id="@+id/userNameTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginLeft="30dp"
                 android:fontFamily="@font/secular_one"
-                android:paddingTop="20dp"
                 android:text="Name"
                 android:textColor="#14171A"
                 android:textSize="20sp"
-                app:layout_constraintLeft_toRightOf="@id/userImage"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/userImage"
+                app:layout_constraintLeft_toLeftOf="parent"/>
 
             <TextView
                 android:id="@+id/userLoginTextView"
@@ -57,15 +55,16 @@
                 android:fontFamily="@font/glegoo"
                 android:text=""
                 android:textSize="18sp"
-                app:layout_constraintLeft_toRightOf="@id/userImage"
-                app:layout_constraintTop_toBottomOf="@id/userNameTextView" />
+                app:layout_constraintTop_toBottomOf="@id/userNameTextView"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="30dp"/>
 
             <View
                 android:id="@+id/view2"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#DDD"
-                app:layout_constraintTop_toBottomOf="@id/userImage" />
+                app:layout_constraintTop_toBottomOf="@id/userLoginTextView" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/postListRecyclerView"
@@ -85,7 +84,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="20dp"
-        android:backgroundTint="@color/baseAppColor"
+        android:backgroundTint="@color/colorAccent"
         android:src="@drawable/ic_create_white_24dp"
         app:borderWidth="0dp" />
 

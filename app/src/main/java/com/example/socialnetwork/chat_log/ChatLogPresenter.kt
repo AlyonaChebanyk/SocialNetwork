@@ -1,19 +1,15 @@
 package com.example.socialnetwork.chat_log
 
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.example.socialnetwork.adapters.ChatLogAdapter
 import com.example.socialnetwork.entities.Message
 import com.example.socialnetwork.entities.User
 import com.example.socialnetwork.repository.Repository
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.fragment_chat_log.*
 import java.util.*
 
 @InjectViewState
@@ -27,7 +23,6 @@ class ChatLogPresenter : MvpPresenter<ChatLogView>() {
         super.onFirstViewAttach()
         viewState.setListenerToSendMessageButton()
         viewState.displaySecondUserName()
-        viewState.setListenerToGotoLatestMessagesButton()
     }
 
     fun setAdapter(secondUser: User) {

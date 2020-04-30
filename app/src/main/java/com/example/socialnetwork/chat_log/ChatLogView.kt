@@ -11,6 +11,4 @@ interface ChatLogView: MvpView {
     fun clearMessageText()
     fun setListenerToSendMessageButton()
     fun displaySecondUserName()
-    fun setListenerToGotoLatestMessagesButton()
-
 }

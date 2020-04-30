@@ -1,4 +1,4 @@
-package com.example.socialnetwork.retrofit
+package com.example.socialnetwork.retrofit.random_user
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
