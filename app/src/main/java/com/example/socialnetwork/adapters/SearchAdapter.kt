@@ -9,6 +9,7 @@ import com.example.socialnetwork.entities.User
 class SearchAdapter: RecyclerView.Adapter<SearchViewHolder>() {
 
     private val searchList = mutableListOf<User>()
+    private val limit = 10
 
     fun clearList(){
         searchList.clear()
@@ -29,5 +30,11 @@ class SearchAdapter: RecyclerView.Adapter<SearchViewHolder>() {
         holder.bind(searchList[position])
     }
 
-    override fun getItemCount(): Int = searchList.size
+    override fun getItemCount(): Int {
+        return if(searchList.size > limit){
+            limit
+        } else {
+            searchList.size
+        }
+    }
 }

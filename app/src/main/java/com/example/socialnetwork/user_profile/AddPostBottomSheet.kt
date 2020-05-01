@@ -92,6 +92,8 @@ class AddPostBottomSheet : BottomSheetDialogFragment() {
 
                     }
 
+                    postImageUri = null
+
                 } else {
                     val userPost = Post(
                         reference.key!!,

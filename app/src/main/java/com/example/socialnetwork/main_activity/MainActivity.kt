@@ -1,5 +1,6 @@
 package com.example.socialnetwork.main_activity
 
+import android.content.Context
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -13,7 +14,7 @@ import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : MvpAppCompatActivity(){
+class MainActivity : MvpAppCompatActivity() {
 
     private val dbAuth = FirebaseAuth.getInstance()
 
@@ -22,7 +23,12 @@ class MainActivity : MvpAppCompatActivity(){
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        bottom_navigation.setupWithNavController(Navigation.findNavController(this, R.id.nav_host_fragment))
+        bottom_navigation.setupWithNavController(
+            Navigation.findNavController(
+                this,
+                R.id.nav_host_fragment
+            )
+        )
 
     }
 
@@ -37,6 +43,12 @@ class MainActivity : MvpAppCompatActivity(){
             R.id.logOut -> {
                 dbAuth.signOut()
                 Repository.currentUser = null
+
+                val pref = getSharedPreferences("PREFERENCES", Context.MODE_PRIVATE)
+                val editor = pref.edit()
+                editor.putBoolean("isSingedIn", false)
+                editor.apply()
+
                 findNavController(R.id.nav_host_fragment).navigate(
                     R.id.singInFragment
                 )

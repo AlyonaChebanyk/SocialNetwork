@@ -99,7 +99,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@id/view2"
                     tools:listitem="@layout/post_item"
-                    android:nestedScrollingEnabled="false"/>
+                    android:isScrollContainer="false"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

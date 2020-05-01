@@ -35,16 +35,13 @@ class UserProfileFragment : MvpAppCompatFragment(), UserProfileView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        requireActivity().toolbar.visibility = View.VISIBLE
+        requireActivity().toolbar.visibility = View.GONE
         requireActivity().bottom_navigation.visibility = View.VISIBLE
 
-        for( i in (1..20)){
-            Repository.uploadRandomPost(requireActivity(), true)
-        }
+//        for( i in (1..20)){
+//            Repository.uploadRandomPost(requireActivity(), true)
+//        }
 
-    }
-
-    override fun setListenerToAddPostButton() {
         addPostButton.setOnClickListener {
             if (bottomSheet.isAdded) {
                 bottomSheet.dialog?.show()
@@ -52,6 +49,7 @@ class UserProfileFragment : MvpAppCompatFragment(), UserProfileView {
                 bottomSheet.show(requireActivity().supportFragmentManager, "TAG")
             }
         }
+
     }
 
     override fun displayUserData(user: User) {

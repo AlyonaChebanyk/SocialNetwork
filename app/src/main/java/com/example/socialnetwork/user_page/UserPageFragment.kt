@@ -32,7 +32,7 @@ class UserPageFragment : MvpAppCompatFragment(), UserPageView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        requireActivity().toolbar.visibility = View.VISIBLE
+        requireActivity().toolbar.visibility = View.GONE
         requireActivity().bottom_navigation.visibility = View.GONE
 
         userCurrentPage = requireArguments().getParcelable("user")!!

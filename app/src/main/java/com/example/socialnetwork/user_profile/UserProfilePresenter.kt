@@ -22,15 +22,11 @@ class UserProfilePresenter : MvpPresenter<UserProfileView>() {
         super.onFirstViewAttach()
 
         viewState.setAdapter(adapter)
-        displayUserData()
-        setListenerToUserPosts()
-        viewState.setListenerToAddPostButton()
-
-    }
-
-    private fun displayUserData(){
         viewState.displayUserData(authUser)
+        setListenerToUserPosts()
+
     }
+
 
     private fun setListenerToUserPosts(){
         val reference = dbRealtime.getReference("/user-posts/${authUser.id}")

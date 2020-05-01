@@ -26,7 +26,7 @@
             android:layout_weight="5"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:textSize="18dp">
+            android:textSize="18sp">
         </EditText>
 
     </LinearLayout>
