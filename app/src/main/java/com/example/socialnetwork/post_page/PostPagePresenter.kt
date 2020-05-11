@@ -22,8 +22,6 @@ class PostPagePresenter : MvpPresenter<PostPageView>(){
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        viewState.setListenerToAddCommentButton()
-        viewState.setListenerToBackButton()
         viewState.setAdapter(adapter)
     }
 

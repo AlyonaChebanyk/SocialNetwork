@@ -17,7 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 class HomePresenter : MvpPresenter<HomeView>() {
 
     private val dbRealtime = FirebaseDatabase.getInstance()
-    private val adapter = PostAdapter(true)
+    private val adapter = PostAdapter()
     private val authUser = Repository.currentUser!!
 
     override fun onFirstViewAttach() {

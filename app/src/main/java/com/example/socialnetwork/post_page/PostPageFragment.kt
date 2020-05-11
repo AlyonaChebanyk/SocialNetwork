@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -12,10 +14,11 @@ import com.example.socialnetwork.adapters.CommentAdapter
 import com.example.socialnetwork.entities.DateToStringConverter
 import com.example.socialnetwork.entities.Post
 import com.example.socialnetwork.entities.User
+import com.example.socialnetwork.repository.Repository
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_post_page.*
-import kotlinx.android.synthetic.main.fragment_user_page.userLoginTextView
+import kotlinx.android.synthetic.main.fragment_post_page.userNameTextView
 import java.util.*
 
 class PostPageFragment : MvpAppCompatFragment(), PostPageView {
@@ -45,15 +48,10 @@ class PostPageFragment : MvpAppCompatFragment(), PostPageView {
         presenter.setListener(user, post)
         presenter.displayPostData(user, post)
 
-    }
-
-    override fun setListenerToBackButton() {
         backButton.setOnClickListener {
             requireActivity().onBackPressed()
         }
-    }
 
-    override fun setListenerToAddCommentButton() {
         addCommentButton.setOnClickListener {
             val commentText = commentEditText.text.toString()
             if (commentText.isNotEmpty()){
@@ -61,6 +59,16 @@ class PostPageFragment : MvpAppCompatFragment(), PostPageView {
             }
 
         }
+
+        userImagePostPage.setOnClickListener {
+            if (user.id == Repository.currentUser!!.id)
+                findNavController().navigate(R.id.action_postPage_to_userProfileFragment)
+            else{
+                val bundle = bundleOf("user" to user)
+                findNavController().navigate(R.id.action_postPage_to_userPageFragment, bundle)
+            }
+        }
+
     }
 
     override fun displayPostData(user: User, post: Post) {

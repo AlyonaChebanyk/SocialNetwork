@@ -10,7 +10,8 @@
     <FrameLayout
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:foregroundGravity="top">
         <View
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -43,7 +44,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="80dp"
+        android:paddingBottom="125dp"
         tools:listitem="@layout/message_item_right_side"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout

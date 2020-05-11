@@ -24,14 +24,14 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/userImage"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
+                android:layout_width="95dp"
+                android:layout_height="95dp"
                 android:layout_gravity="start"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="40dp"
                 android:background="@drawable/ic_person_black_24dp"
                 app:civ_border_color="@color/white"
-                app:civ_border_width="4dp"
+                app:civ_border_width="5dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,11 +39,11 @@
                 android:id="@+id/userNameTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
+                android:layout_marginStart="10dp"
                 android:fontFamily="@font/secular_one"
                 android:text="Name"
                 android:textColor="#14171A"
-                android:textSize="20sp"
+                android:textSize="21sp"
                 app:layout_constraintTop_toBottomOf="@id/userImage"
                 app:layout_constraintLeft_toLeftOf="parent"/>
 
@@ -52,15 +52,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:fontFamily="@font/glegoo"
-                android:text=""
-                android:textSize="18sp"
+                android:text="/@login"
+                android:textSize="17sp"
                 app:layout_constraintTop_toBottomOf="@id/userNameTextView"
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_marginLeft="30dp"/>
 
             <View
                 android:id="@+id/view2"
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#DDD"

@@ -8,11 +8,11 @@
     android:orientation="horizontal">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:id="@+id/userImage"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="12dp"
         android:layout_marginEnd="18dp"
         android:layout_weight="1"
         android:background="@drawable/ic_person_black_24dp"
@@ -33,10 +33,19 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/latestMessageTimeTextView"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
         android:id="@+id/latestMessageTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="25dp"
         android:lineSpacingMultiplier="1.2"
         android:padding="10dp"
         android:text="Last message"

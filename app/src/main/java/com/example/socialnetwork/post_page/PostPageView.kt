@@ -10,7 +10,5 @@ interface PostPageView: MvpView {
     fun displayPostData(user: User, post: Post)
     fun setAdapter(commentAdapter: CommentAdapter)
     fun clearCommentText()
-    fun setListenerToAddCommentButton()
-    fun setListenerToBackButton()
 
 }

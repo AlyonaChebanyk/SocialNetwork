@@ -64,8 +64,14 @@ dependencies {
     //Circle Image
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
+    //Rounded Image
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+
     //Timber
     implementation 'com.jakewharton.timber:timber:4.7.1'
+
+    //Ripple effect
+    implementation 'com.balysv:material-ripple:1.0.2'
 
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'

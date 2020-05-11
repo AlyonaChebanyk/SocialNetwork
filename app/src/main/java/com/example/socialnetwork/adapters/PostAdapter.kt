@@ -8,7 +8,7 @@ import com.example.socialnetwork.R
 import com.example.socialnetwork.entities.Post
 import com.example.socialnetwork.entities.User
 
-class PostAdapter(private val goToUserPageByClick: Boolean = false) :
+class PostAdapter() :
     RecyclerView.Adapter<PostViewHolder>() {
 
     private val postList: ArrayList<Post> = arrayListOf()
@@ -25,7 +25,7 @@ class PostAdapter(private val goToUserPageByClick: Boolean = false) :
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
-        holder.bind(postList[position], goToUserPageByClick)
+        holder.bind(postList[position])
     }
 
     override fun getItemCount(): Int = postList.size
